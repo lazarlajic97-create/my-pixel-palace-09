@@ -172,8 +172,9 @@ function BookPage() {
             )}
 
             {step === "slot" && (
-              <div>
+              <div key="slot" className="animate-fade-up">
                 <h3 className="text-lg font-semibold mb-1">Wähle einen Zeitpunkt</h3>
+
                 <p className="text-sm text-[color:var(--color-text-muted)] mb-6">Alle Zeiten werden in deiner lokalen Zeitzone angezeigt.</p>
                 {errors.slot && <div className="mb-4 text-sm text-[color:var(--color-danger)] glass p-3 border border-[rgba(248,113,113,0.3)]">{errors.slot}</div>}
                 <div className="grid md:grid-cols-[1fr_280px] gap-6">
