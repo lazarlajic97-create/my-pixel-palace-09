@@ -1,10 +1,21 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { EventType } from "@/lib/types";
+import { hasAvailableSlots, ymd } from "@/lib/calendar-service";
+import { loadAvailability } from "@/lib/storage";
 
 const MONTHS = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
 const DAYS = ["Mo","Di","Mi","Do","Fr","Sa","So"];
 
-export function BookingCalendar({ value, onChange }: { value: Date | null; onChange: (d: Date) => void }) {
+export function BookingCalendar({
+  value,
+  onChange,
+  event,
+}: {
+  value: Date | null;
+  onChange: (d: Date) => void;
+  event?: EventType;
+}) {
   const today = new Date(); today.setHours(0,0,0,0);
   const [view, setView] = useState(() => {
     const d = value ?? today;
@@ -14,22 +25,31 @@ export function BookingCalendar({ value, onChange }: { value: Date | null; onCha
   const year = view.getFullYear();
   const month = view.getMonth();
   const firstDay = new Date(year, month, 1);
-  const startWeekday = (firstDay.getDay() + 6) % 7; // Mon=0
+  const startWeekday = (firstDay.getDay() + 6) % 7;
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
   const cells: (Date | null)[] = [];
   for (let i = 0; i < startWeekday; i++) cells.push(null);
   for (let d = 1; d <= daysInMonth; d++) cells.push(new Date(year, month, d));
 
+  const availability = useMemo(() => loadAvailability(), []);
   const isSameDay = (a: Date, b: Date) => a.toDateString() === b.toDateString();
-  const isDisabled = (d: Date) => d < today || d.getDay() === 0 || d.getDay() === 6;
+
+  function isDisabled(d: Date) {
+    if (d < today) return true;
+    if (availability.blockedDates.includes(ymd(d))) return true;
+    const rule = availability.rules.find((r) => r.weekday === d.getDay());
+    if (!rule || !rule.isActive) return true;
+    if (event) return !hasAvailableSlots(event, d);
+    return false;
+  }
 
   return (
     <div className="w-full">
       <div className="flex items-center justify-between mb-4">
         <div>
           <div className="text-base font-semibold">{MONTHS[month]} {year}</div>
-          <div className="text-xs text-[color:var(--color-text-dim)]">Zeitzone: Europa/Zürich</div>
+          <div className="text-xs text-[color:var(--color-text-dim)]">Zeitzone: {availability.timezone}</div>
         </div>
         <div className="flex items-center gap-1">
           <button onClick={() => setView(new Date(year, month - 1, 1))} className="h-9 w-9 grid place-items-center rounded-lg border border-[color:var(--color-border-strong)] hover:bg-white/5"><ChevronLeft className="h-4 w-4" /></button>
@@ -71,6 +91,13 @@ export function BookingCalendar({ value, onChange }: { value: Date | null; onCha
 }
 
 export function TimeSlots({ value, onChange, slots }: { value: string | null; onChange: (t: string) => void; slots: string[] }) {
+  if (slots.length === 0) {
+    return (
+      <div className="glass p-6 text-center text-xs text-[color:var(--color-text-muted)]">
+        Keine freien Zeiten an diesem Tag. Bitte wähle ein anderes Datum.
+      </div>
+    );
+  }
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
       {slots.map((t) => {

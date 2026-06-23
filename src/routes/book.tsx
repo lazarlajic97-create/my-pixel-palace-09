@@ -1,18 +1,25 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { PublicLayout } from "@/components/PublicLayout";
 import { BookingCalendar, TimeSlots, formatDateDE } from "@/components/BookingCalendar";
-import { EVENT_TYPES, INDUSTRIES, TIME_SLOTS } from "@/lib/sovoice-data";
-import { useState } from "react";
+import { EVENT_TYPES, INDUSTRIES } from "@/lib/sovoice-data";
+import { useMemo, useState } from "react";
 import { Clock, Video, Check, ArrowLeft, ArrowRight } from "lucide-react";
+import { createBooking, getAvailableSlots, ymd } from "@/lib/calendar-service";
 
-export const Route = createFileRoute("/book")({ component: BookPage });
+export const Route = createFileRoute("/book")({
+  component: BookPage,
+  validateSearch: (s: Record<string, unknown>) => ({
+    event: (s.event as string) || "demo",
+  }),
+});
 
 type Step = "event" | "slot" | "form";
 
 function BookPage() {
   const navigate = useNavigate();
-  const [step, setStep] = useState<Step>("event");
-  const [eventId, setEventId] = useState<string>("demo");
+  const { event: initialEvent } = Route.useSearch();
+  const [step, setStep] = useState<Step>(initialEvent ? "slot" : "event");
+  const [eventId, setEventId] = useState<string>(initialEvent ?? "demo");
   const [date, setDate] = useState<Date | null>(null);
   const [time, setTime] = useState<string | null>(null);
   const [form, setForm] = useState({
@@ -20,21 +27,53 @@ function BookPage() {
     website: "", callVolume: "", automate: "", notes: "", consent: false,
   });
   const [errors, setErrors] = useState<Record<string,string>>({});
+  const [submitting, setSubmitting] = useState(false);
 
   const event = EVENT_TYPES.find(e => e.id === eventId)!;
+  const slots = useMemo(
+    () => (date ? getAvailableSlots({ eventType: event, date }) : []),
+    [date, event],
+  );
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
+    if (!date || !time) return;
     const err: Record<string,string> = {};
-    if (!form.firstName) err.firstName = "Pflichtfeld";
-    if (!form.lastName) err.lastName = "Pflichtfeld";
+    if (!form.firstName.trim()) err.firstName = "Pflichtfeld";
+    if (!form.lastName.trim()) err.lastName = "Pflichtfeld";
     if (!form.email || !/^\S+@\S+\.\S+$/.test(form.email)) err.email = "Bitte gib eine gültige E Mail Adresse ein.";
-    if (!form.phone) err.phone = "Pflichtfeld";
-    if (!form.company) err.company = "Pflichtfeld";
+    if (!form.phone.trim() || form.phone.replace(/\D/g, "").length < 6) err.phone = "Bitte gib eine gültige Telefonnummer ein.";
+    if (!form.company.trim()) err.company = "Pflichtfeld";
     if (!form.consent) err.consent = "Bitte akzeptiere die Datenschutzbestimmungen.";
     setErrors(err);
     if (Object.keys(err).length) return;
-    navigate({ to: "/book/confirmed", search: { event: eventId, date: date?.toISOString() ?? "", time: time ?? "", name: `${form.firstName} ${form.lastName}` } as any });
+
+    // Slot revalidieren
+    const fresh = getAvailableSlots({ eventType: event, date });
+    if (!fresh.includes(time)) {
+      setErrors({ slot: "Der gewählte Zeitpunkt ist nicht mehr verfügbar. Bitte wähle einen anderen Slot." });
+      setStep("slot");
+      setTime(null);
+      return;
+    }
+
+    setSubmitting(true);
+    const booking = createBooking({
+      eventTypeId: event.id,
+      firstName: form.firstName.trim(),
+      lastName: form.lastName.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim(),
+      companyName: form.company.trim(),
+      industry: form.industry,
+      website: form.website.trim() || undefined,
+      incomingCallsPerDay: form.callVolume.trim() || undefined,
+      automationGoal: form.automate.trim() || undefined,
+      message: form.notes.trim() || undefined,
+      date: ymd(date),
+      startTime: time,
+    });
+    navigate({ to: "/book/confirmed", search: { b: booking.id } as any });
   }
 
   return (
@@ -72,15 +111,15 @@ function BookPage() {
             <div className="text-xs text-[color:var(--color-text-muted)]">SoVoice Calendar</div>
             <h2 className="text-xl font-semibold mt-1">{event.title}</h2>
             <div className="mt-2 flex items-center gap-3 text-xs text-[color:var(--color-text-muted)]">
-              <span className="inline-flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> {event.duration} Minuten</span>
-              <span className="inline-flex items-center gap-1.5"><Video className="h-3.5 w-3.5" /> Online · Google Meet</span>
+              <span className="inline-flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> {event.durationMinutes} Minuten</span>
+              <span className="inline-flex items-center gap-1.5"><Video className="h-3.5 w-3.5" /> {event.meetingType}</span>
             </div>
             <p className="mt-4 text-sm text-[color:var(--color-text-muted)]">{event.description}</p>
 
             <div className="mt-5 pt-5 border-t border-[color:var(--color-border)]">
               <div className="text-xs font-semibold mb-2 text-[color:var(--color-text-muted)]">Das erwartet dich</div>
               <ul className="space-y-2 text-sm">
-                {["Live Demo des KI Telefonagenten","Analyse deines aktuellen Telefonprozesses","Einschätzung zum Automatisierungspotenzial","Nächste Schritte für Integration"].map(b => (
+                {event.benefits.map(b => (
                   <li key={b} className="flex items-start gap-2">
                     <Check className="h-4 w-4 text-[color:var(--color-success)] mt-0.5 shrink-0" />
                     <span className="text-[color:var(--color-text-muted)]">{b}</span>
@@ -92,9 +131,13 @@ function BookPage() {
             {(date || time) && (
               <div className="mt-5 pt-5 border-t border-[color:var(--color-border)] text-sm">
                 {date && <div className="text-[color:var(--color-text-muted)]">{formatDateDE(date)}</div>}
-                {time && <div className="font-semibold mt-1">{time} – {addMinutes(time, event.duration)} (CET)</div>}
+                {time && <div className="font-semibold mt-1">{time} – {addMinutes(time, event.durationMinutes)} (CET)</div>}
               </div>
             )}
+
+            <div className="mt-5 pt-5 border-t border-[color:var(--color-border)] text-xs text-[color:var(--color-text-muted)]">
+              Deine Daten werden verschlüsselt übertragen und ausschliesslich für die Terminorganisation verwendet. Mehr in der <Link to="/datenschutz" className="text-[#60a5fa] underline">Datenschutzerklärung</Link>.
+            </div>
           </aside>
 
           {/* RIGHT: dynamic step */}
@@ -114,7 +157,7 @@ function BookPage() {
                           <Video className="h-4 w-4 text-white" />
                         </div>
                         <div className="font-semibold text-sm">{et.title}</div>
-                        <div className="text-xs text-[color:var(--color-text-muted)] mt-1">{et.duration} Minuten · Online</div>
+                        <div className="text-xs text-[color:var(--color-text-muted)] mt-1">{et.durationMinutes} Minuten · {et.meetingType}</div>
                         <div className="text-xs text-[color:var(--color-text-muted)] mt-2 line-clamp-2">{et.description}</div>
                       </button>
                     );
@@ -130,14 +173,15 @@ function BookPage() {
               <div>
                 <h3 className="text-lg font-semibold mb-1">Wähle einen Zeitpunkt</h3>
                 <p className="text-sm text-[color:var(--color-text-muted)] mb-6">Alle Zeiten werden in deiner lokalen Zeitzone angezeigt.</p>
+                {errors.slot && <div className="mb-4 text-sm text-[color:var(--color-danger)] glass p-3 border border-[rgba(248,113,113,0.3)]">{errors.slot}</div>}
                 <div className="grid md:grid-cols-[1fr_280px] gap-6">
-                  <BookingCalendar value={date} onChange={(d) => { setDate(d); setTime(null); }} />
+                  <BookingCalendar value={date} onChange={(d) => { setDate(d); setTime(null); }} event={event} />
                   <div>
                     <div className="text-sm font-semibold mb-3">
                       {date ? formatDateDE(date) : "Datum wählen"}
                     </div>
                     {date ? (
-                      <TimeSlots value={time} onChange={setTime} slots={TIME_SLOTS} />
+                      <TimeSlots value={time} onChange={setTime} slots={slots} />
                     ) : (
                       <div className="glass p-6 text-center text-xs text-[color:var(--color-text-muted)]">
                         Bitte zuerst ein Datum auswählen.
@@ -203,7 +247,7 @@ function BookPage() {
                 <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <button type="button" onClick={() => setStep("slot")} className="btn-secondary"><ArrowLeft className="h-4 w-4" /> Zurück</button>
                   <div className="text-xs text-[color:var(--color-text-muted)] sm:text-right">Du erhältst direkt nach der Buchung eine Bestätigung per E Mail.</div>
-                  <button type="submit" className="btn-primary">Termin bestätigen</button>
+                  <button type="submit" disabled={submitting} className="btn-primary disabled:opacity-60">{submitting ? "Wird gebucht..." : "Termin bestätigen"}</button>
                 </div>
               </form>
             )}
