@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SoVoice Calendar - Termin bearbeiten</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config injected -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary": "#bec6e0",
+                        "surface": "#0c1324",
+                        "outline-variant": "#434655",
+                        "tertiary-fixed": "#dae2fd",
+                        "on-surface": "#dce1fb",
+                        "on-primary": "#002a78",
+                        "surface-bright": "#33394c",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#eef0ff",
+                        "tertiary-fixed-dim": "#bec6e0",
+                        "inverse-surface": "#dce1fb",
+                        "surface-container-highest": "#2e3447",
+                        "on-tertiary-fixed-variant": "#3f465c",
+                        "surface-container-high": "#23293c",
+                        "on-surface-variant": "#c3c6d7",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "outline": "#8d90a0",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "background": "#0c1324",
+                        "on-tertiary": "#283044",
+                        "surface-variant": "#2e3447",
+                        "secondary-container": "#03b5d3",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-container": "#656d84",
+                        "primary-container": "#2563eb",
+                        "primary": "#b4c5ff",
+                        "surface-container-low": "#151b2d",
+                        "surface-container-lowest": "#070d1f",
+                        "surface-tint": "#b4c5ff",
+                        "inverse-primary": "#0053db",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-tertiary-fixed": "#131b2e",
+                        "secondary": "#4cd7f6",
+                        "inverse-on-surface": "#2a3043",
+                        "on-secondary": "#003640",
+                        "on-secondary-container": "#00424e",
+                        "surface-container": "#191f31",
+                        "on-primary-fixed": "#00174b",
+                        "on-background": "#dce1fb",
+                        "secondary-fixed": "#acedff",
+                        "on-secondary-fixed": "#001f26",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-dim": "#0c1324"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "xl": "40px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "gutter": "20px",
+                        "container-margin": "32px",
+                        "base": "4px",
+                        "lg": "24px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-sm": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    fontSize: {
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-sm": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Glassmorphism utility classes */
+        .glass-panel {
+            background: rgba(21, 27, 45, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .glass-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(76, 215, 246, 0.4);
+            box-shadow: 0 0 15px rgba(76, 215, 246, 0.1);
+        }
+        .glass-button.active {
+            background: rgba(37, 99, 235, 0.2);
+            border-color: #2563eb;
+            color: #fff;
+        }
+
+        /* Custom Scrollbar for time slots */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: rgba(255,255,255,0.02); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen flex items-center justify-center p-container-margin relative overflow-x-hidden">
+<!-- Atmospheric Glows -->
+<div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-primary-container/20 blur-[120px] pointer-events-none"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[400px] h-[400px] rounded-full bg-secondary/10 blur-[100px] pointer-events-none"></div>
+<!-- Main Container -->
+<main class="glass-panel w-full max-w-5xl rounded-xl shadow-2xl flex flex-col relative z-10 overflow-hidden">
+<!-- Header / Brand Context -->
+<header class="w-full flex items-center justify-between p-lg border-b border-white/5">
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary-container text-[18px]" data-weight="fill">schedule</span>
+</div>
+<span class="font-headline-md text-headline-md text-primary tracking-tight">SoVoice</span>
+</div>
+<!-- View Toggle (For demonstration purposes in single file) -->
+<div class="flex bg-surface-container-high rounded-full p-1 border border-white/5">
+<button class="px-md py-sm rounded-full font-label-md text-label-md transition-all bg-primary-container text-on-primary-container" id="tab-reschedule" onclick="switchView('reschedule')">Verschieben</button>
+<button class="px-md py-sm rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all" id="tab-cancel" onclick="switchView('cancel')">Stornieren</button>
+</div>
+</header>
+<!-- ========================================================= -->
+<!-- VIEW 1: RESCHEDULE (Termin verschieben)                   -->
+<!-- ========================================================= -->
+<div class="flex flex-col lg:flex-row w-full animate-fade-in block" id="view-reschedule">
+<!-- Left Column: Context / Old Appointment -->
+<div class="w-full lg:w-1/3 border-r border-white/5 p-lg flex flex-col bg-surface-container/30">
+<div class="mb-lg">
+<h1 class="font-display-sm text-display-sm text-on-surface mb-xs">Termin verschieben</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Wähle einfach einen neuen Zeitpunkt für unser Meeting aus dem Kalender rechts.</p>
+</div>
+<!-- Current Appointment Card -->
+<div class="bg-surface-container-high rounded-xl p-md border border-outline-variant/30 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-outline-variant"></div>
+<div class="pl-sm">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider block mb-sm">Bisheriger Termin</span>
+<div class="flex items-center gap-md mb-md">
+<div class="w-12 h-12 rounded-full overflow-hidden border border-white/10 shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a business woman in her 30s with dark hair, wearing a sleek navy blazer, smiling subtly against a dark, minimalist studio background with cool cyan rim lighting, reflecting a premium B2B tech environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEcwO4xpg9cuWu_abJQ9h-qe4ZoMcOK27_ZVDI-1uRHORtRmtVWMX5oIg8Wpiv976o_4BoGtP5Nm3Az3FHUWM8jhYAQuSRwccDcxRbD8G8_opceLJ7Y9UlkYiDnVwRJZuuSW7ua5wLoaGiiGaLpCLuAWv_CltFcjimQn1oRlHC9FNxamj-F-3lf4aM8fJgjYDs6b_Iz7edGBNtgHmDySB4MHsYQDxLjdm776-ic_SFRS3f-bZaPOAv8jgVgggAG2Tni_M6_3KNbELR"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Produktdemo SoVoice</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">mit Sarah Weber</p>
+</div>
+</div>
+<div class="space-y-sm">
+<div class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="font-body-md text-body-md">Donnerstag, 24. Okt. 2024</span>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+<span class="font-body-md text-body-md">14:00 - 14:45 Uhr (45 Min)</span>
+</div>
+<div class="flex items-center gap-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">videocam</span>
+<span class="font-body-md text-body-md">Google Meet</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-lg">
+<p class="font-label-md text-label-md text-outline-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+                        Sichere &amp; automatisierte Umbuchung
+                    </p>
+</div>
+</div>
+<!-- Right Column: Calendar Selection -->
+<div class="w-full lg:w-2/3 p-lg flex flex-col">
+<div class="flex items-center justify-between mb-lg">
+<div class="flex items-center gap-sm">
+<button class="w-8 h-8 rounded-full glass-button flex items-center justify-center text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<span class="font-headline-md text-headline-md text-on-surface w-32 text-center">Oktober 2024</span>
+<button class="w-8 h-8 rounded-full glass-button flex items-center justify-center text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+<div class="font-label-md text-label-md text-on-surface-variant flex items-center gap-xs bg-surface-container-high px-sm py-xs rounded">
+<span class="material-symbols-outlined text-[14px]">public</span>
+                        Europe/Berlin
+                    </div>
+</div>
+<!-- Calendar + Times Layout -->
+<div class="flex gap-lg h-full">
+<!-- Date Grid -->
+<div class="flex-1">
+<div class="grid grid-cols-7 gap-xs mb-sm">
+<div class="font-label-md text-label-md text-outline-variant text-center">Mo</div>
+<div class="font-label-md text-label-md text-outline-variant text-center">Di</div>
+<div class="font-label-md text-label-md text-outline-variant text-center">Mi</div>
+<div class="font-label-md text-label-md text-outline-variant text-center">Do</div>
+<div class="font-label-md text-label-md text-outline-variant text-center">Fr</div>
+<div class="font-label-md text-label-md text-outline-variant text-center">Sa</div>
+<div class="font-label-md text-label-md text-outline-variant text-center">So</div>
+</div>
+<div class="grid grid-cols-7 gap-xs">
+<!-- Empty days -->
+<div class="aspect-square"></div>
+<!-- Days -->
+<button class="aspect-square rounded-lg font-body-md text-body-md text-outline-variant flex items-center justify-center hover:bg-white/5 disabled:opacity-30" disabled="">1</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-outline-variant flex items-center justify-center hover:bg-white/5 disabled:opacity-30" disabled="">2</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-outline-variant flex items-center justify-center hover:bg-white/5 disabled:opacity-30" disabled="">3</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">4</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">5</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">6</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">7</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">8</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">9</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">10</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button relative">
+                                11
+                                <span class="absolute bottom-1 w-1 h-1 rounded-full bg-secondary"></span>
+</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">12</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">13</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">14</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">15</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">16</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">17</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">18</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">19</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">20</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">21</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">22</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">23</button>
+<!-- Old Date Indication -->
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center bg-surface-container-highest border border-outline-variant/50 relative" title="Bisheriger Termin">
+                                24
+                                <span class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-outline-variant"></span>
+</button>
+<!-- Selected Date -->
+<button class="aspect-square rounded-lg font-body-md text-body-md flex items-center justify-center bg-primary/10 border-2 border-primary text-primary font-bold shadow-[0_0_15px_rgba(180,197,255,0.15)]">25</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">26</button>
+<button class="aspect-square rounded-lg font-body-md text-body-md text-on-surface flex items-center justify-center glass-button">27</button>
+</div>
+</div>
+<!-- Time Slots Column -->
+<div class="w-32 border-l border-white/5 pl-lg flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant mb-md block">Fr, 25. Okt.</span>
+<div class="flex-1 overflow-y-auto pr-sm space-y-sm max-h-[300px]">
+<button class="w-full py-sm rounded-md font-body-md text-body-md text-center glass-button">09:00</button>
+<button class="w-full py-sm rounded-md font-body-md text-body-md text-center glass-button">09:30</button>
+<button class="w-full py-sm rounded-md font-body-md text-body-md text-center glass-button">10:00</button>
+<button class="w-full py-sm rounded-md font-body-md text-body-md text-center glass-button">11:00</button>
+<!-- Selected Time -->
+<button class="w-full py-sm rounded-md font-body-md text-body-md text-center bg-primary-container text-on-primary-container font-semibold shadow-lg">13:30</button>
+<button class="w-full py-sm rounded-md font-body-md text-body-md text-center glass-button">14:00</button>
+<button class="w-full py-sm rounded-md font-body-md text-body-md text-center glass-button">15:00</button>
+<button class="w-full py-sm rounded-md font-body-md text-body-md text-center glass-button">16:30</button>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="mt-xl pt-lg border-t border-white/5 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant">Neuer Zeitpunkt:</span>
+<span class="font-headline-md text-headline-md text-primary">Fr, 25. Okt. um 13:30 Uhr</span>
+</div>
+<button class="bg-primary-container text-on-primary-container font-headline-md text-headline-md px-lg py-sm rounded-lg hover:bg-inverse-primary transition-colors flex items-center gap-sm">
+                        Neuen Termin bestätigen
+                        <span class="material-symbols-outlined text-[20px]">check_circle</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ========================================================= -->
+<!-- VIEW 2: CANCELLATION (Termin stornieren)                  -->
+<!-- ========================================================= -->
+<div class="hidden flex-col items-center justify-center w-full py-xl px-lg animate-fade-in relative" id="view-cancel">
+<!-- Danger Glow -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-error/10 blur-[80px] pointer-events-none"></div>
+<div class="max-w-xl w-full flex flex-col items-center text-center relative z-10">
+<div class="w-16 h-16 rounded-full bg-error-container/20 flex items-center justify-center mb-lg border border-error/20">
+<span class="material-symbols-outlined text-error text-[32px]">event_busy</span>
+</div>
+<h1 class="font-display-sm text-display-sm text-on-surface mb-sm">Termin stornieren</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mb-xl max-w-md">
+                    Schade, dass es nicht passt. Möchtest du den Termin für <strong>Produktdemo SoVoice</strong> wirklich absagen?
+                </p>
+<!-- Minimal Appt Card -->
+<div class="w-full bg-surface-container-high rounded-lg p-md border border-white/5 flex items-center justify-between text-left mb-xl">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-white/10 shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a business woman in her 30s with dark hair, wearing a sleek navy blazer, smiling subtly against a dark, minimalist studio background with cool cyan rim lighting, reflecting a premium B2B tech environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBcmGwGfawCMMNKzPca5_ACx38Nr2EIWyCDTHQUDvmdKDbNCOgnK2XsXvkkKpD_iaeCTd9WrsrxZkzI3pwSpxzAQKpNqQyP8Zm-fGgncB1sQtemJl-hWpijR2mTs2fKA36cXWT9off2vWEe78f7TuBQo94Z0nhNLsopNqsZn0DLtHuq8v_fESRx2XQ1Irs8e6KMTEyrdQfMkwDp8U_3VIV1AQn5pFvM0YjVlEsyHxQeuQqVRpqUuPlkf25g5B1AgVOdcuENNUb7Wf7"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Produktdemo</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Do, 24. Okt. • 14:00 Uhr</p>
+</div>
+</div>
+<span class="font-label-md text-label-md text-outline-variant bg-surface-container py-xs px-sm rounded">45 Min</span>
+</div>
+<!-- Reason Form -->
+<div class="w-full text-left mb-xl">
+<label class="font-label-md text-label-md text-on-surface-variant block mb-sm">Nachricht an Sarah Weber (Optional)</label>
+<textarea class="w-full bg-surface-container-highest border border-outline-variant/50 rounded-lg p-md font-body-md text-body-md text-on-surface placeholder-outline-variant focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="Kurzer Grund für die Absage..." rows="3"></textarea>
+</div>
+<!-- Actions -->
+<div class="flex flex-col sm:flex-row gap-md w-full">
+<button class="flex-1 py-sm px-lg rounded-lg border border-error/30 text-error font-headline-md text-headline-md hover:bg-error/10 transition-colors">
+                        Termin stornieren
+                    </button>
+<button class="flex-1 py-sm px-lg rounded-lg bg-surface-container-highest border border-white/10 text-on-surface font-headline-md text-headline-md hover:bg-white/5 transition-colors" onclick="switchView('reschedule')">
+                        Neuen Termin wählen
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Simple JS to switch views for presentation purposes -->
+<script>
+        function switchView(view) {
+            const rescheduleView = document.getElementById('view-reschedule');
+            const cancelView = document.getElementById('view-cancel');
+            const tabReschedule = document.getElementById('tab-reschedule');
+            const tabCancel = document.getElementById('tab-cancel');
+
+            if (view === 'reschedule') {
+                rescheduleView.classList.remove('hidden');
+                cancelView.classList.add('hidden');
+                
+                tabReschedule.className = 'px-md py-sm rounded-full font-label-md text-label-md transition-all bg-primary-container text-on-primary-container';
+                tabCancel.className = 'px-md py-sm rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all';
+            } else {
+                rescheduleView.classList.add('hidden');
+                cancelView.classList.remove('hidden');
+                cancelView.classList.add('flex'); // Maintain flex layout
+
+                tabCancel.className = 'px-md py-sm rounded-full font-label-md text-label-md transition-all bg-primary-container text-on-primary-container';
+                tabReschedule.className = 'px-md py-sm rounded-full font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all';
+            }
+        }
+    </script>
+</body></html>

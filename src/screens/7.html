@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SoVoice - Automatisierte Terminplanung</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#33394c",
+                        "surface-container-low": "#151b2d",
+                        "on-secondary-container": "#00424e",
+                        "surface-container-highest": "#2e3447",
+                        "surface-container-high": "#23293c",
+                        "on-surface-variant": "#c3c6d7",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "on-tertiary-container": "#eef0ff",
+                        "background": "#0c1324",
+                        "surface-container-lowest": "#070d1f",
+                        "primary": "#b4c5ff",
+                        "outline": "#8d90a0",
+                        "on-primary-fixed": "#00174b",
+                        "on-tertiary-fixed": "#131b2e",
+                        "on-background": "#dce1fb",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-tint": "#b4c5ff",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "inverse-on-surface": "#2a3043",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#656d84",
+                        "outline-variant": "#434655",
+                        "error-container": "#93000a",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-fixed-dim": "#bec6e0",
+                        "on-secondary-fixed": "#001f26",
+                        "inverse-surface": "#dce1fb",
+                        "surface-dim": "#0c1324",
+                        "primary-container": "#2563eb",
+                        "primary-fixed": "#dbe1ff",
+                        "inverse-primary": "#0053db",
+                        "surface-container": "#191f31",
+                        "secondary-fixed": "#acedff",
+                        "on-primary": "#002a78",
+                        "tertiary": "#bec6e0",
+                        "on-tertiary": "#283044",
+                        "on-error-container": "#ffdad6",
+                        "on-surface": "#dce1fb",
+                        "secondary": "#4cd7f6",
+                        "on-tertiary-fixed-variant": "#3f465c",
+                        "surface": "#0c1324",
+                        "secondary-container": "#03b5d3",
+                        "on-secondary": "#003640",
+                        "tertiary-fixed": "#dae2fd",
+                        "surface-variant": "#2e3447",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-error": "#690005"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "40px",
+                        "md": "16px",
+                        "container-margin": "32px",
+                        "xs": "4px",
+                        "gutter": "20px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "display-sm": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "display-sm": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #020617; /* Level 0 Floor */
+            color: #dce1fb;
+        }
+        
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .glass-button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-button:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+        }
+
+        .ambient-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        /* Mobile specific adjustments */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="relative min-h-screen overflow-x-hidden font-body-md text-on-surface antialiased">
+<!-- Ambient Glows -->
+<div class="ambient-glow top-0 right-0 transform translate-x-1/2 -translate-y-1/2"></div>
+<div class="ambient-glow top-[40%] left-0 transform -translate-x-1/2"></div>
+<!-- Mobile Top Navigation (Simplified from JSON for Landing Page context) -->
+<nav class="fixed top-0 w-full z-50 bg-surface/40 backdrop-blur-xl border-b border-white/10 shadow-sm transition-all duration-300 ease-in-out flex justify-between items-center px-container-margin h-20 max-w-full md:hidden">
+<div class="font-display-sm text-display-sm text-primary tracking-tighter">SoVoice</div>
+<button class="text-primary-container p-sm glass-button rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+<!-- Main Content -->
+<main class="relative z-10 pt-[100px] px-md pb-xl flex flex-col gap-lg md:hidden">
+<!-- Hero Section -->
+<section class="flex flex-col items-center text-center gap-md">
+<div class="inline-flex items-center gap-xs px-sm py-xs rounded-full bg-primary-container/20 border border-primary-container/30 mb-sm">
+<span class="material-symbols-outlined text-secondary text-[14px]">auto_awesome</span>
+<span class="font-label-md text-label-md text-secondary uppercase tracking-widest">KI-Gestützte Planung</span>
+</div>
+<h1 class="font-display-sm text-display-sm text-on-surface">
+                Ihre Zeit, <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Perfekt Getaktet.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[280px]">
+                Automatisieren Sie Ihre Terminvergabe mit Swiss Precision. Weniger E-Mails, mehr Fokus.
+            </p>
+<div class="flex flex-col w-full gap-sm mt-md">
+<button class="w-full py-md px-lg bg-primary-container text-white font-label-md text-label-md uppercase tracking-widest rounded-lg hover:bg-inverse-primary transition-colors flex items-center justify-center gap-sm">
+                    Kostenlos Testen
+                    <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="w-full py-md px-lg glass-button text-on-surface font-label-md text-label-md uppercase tracking-widest rounded-lg flex items-center justify-center gap-sm">
+                    Demo Ansehen
+                    <span class="material-symbols-outlined text-[18px]">play_circle</span>
+</button>
+</div>
+<div class="flex items-center gap-sm mt-sm opacity-80">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-background object-cover" data-alt="A macro shot of a sleek, modern smartwatch face showing a subtle blue calendar notification, high-end tech aesthetic, dark moody lighting, hyper-realistic, depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWDLbTdnphSazHE96IHJrOhyqcs42MzZkjmJchk_2graZj24hotSMY7FWUZaAfdAJTUZV3KlpSCbFDjsllGQB8bwboaeu5P286-fkSl9VNXniSazzNg_G3Hfdq857kpQ3_F_R8-bUq5Ws4qYXmJpTWw8-iREt2u1kgp506g0Q5B4KB5-c5ImSH2AfesZ5X4I_9riI1L_v8Dg-mehfHqRiC_s140Y18ITJZ9fu2Rm7IbkjjBJvtuSWmFLzR3tjJABbUipydE4DOe-Hl"/>
+<img class="w-8 h-8 rounded-full border-2 border-background object-cover" data-alt="A close up of a premium fountain pen resting on a dark blue leather desk pad, signifying professional business, dramatic spotlight, luxury office environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDl1kA1B4EhIktSt7lxDwq8GroFowxeGYeKov5Em2ECymfCvrLYLhGPSWhGyTQAJzZdraNTVOupLzdwc8iHhfL-Lf3BvfW2a8HraK7EyeUI5CEcu3X6UB4hkpJcYhYlKot3IPidm63wUYLXMRSebEYPSWyBEjc8pJuXxLpAo7RifM7wB2GUD8-6UKalVv2U5kVZiIbnXIFjtQvzc0zyWxbFydTBPCm7nB19SgkJtNzfDLfGhIzC2JqZ4ffiIaoSEY8LQfF7DcjlXB7f"/>
+<img class="w-8 h-8 rounded-full border-2 border-background object-cover" data-alt="Abstract geometric glass shapes reflecting neon cyan and deep blue light, representing connectivity and network, sharp edges, 3d render style, dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTdZ1VC7Fqjk89kEu4Gqb25QUFlk1bDpijjKuKEPaPMcmy7sAJF42NlGu61ZPx4uu3WIMznby2n1jNIPTyKbk8Sq2Py36szg6EEbRk9EwR__dxPLaJLz5a2ApTdYqWzxm4GkQquqqnCrBjr-ovAH_BLMgd95EVoaokfaWLx03LgU1IvOQwHQ0I84J_PTvz5j5KFWFeclukgtBVz6mJ4A7dOv6vxTmNq1PmDWJLKFOwcYtINcN5VphpBUl34yAMmOXvq1rik2VHAooM"/>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant">+2.000 Teams vertrauen uns</span>
+</div>
+</section>
+<!-- Bento Grid: Mobile Simplified View -->
+<section class="flex flex-col gap-md mt-lg">
+<!-- Calendar Preview Card -->
+<div class="glass-panel rounded-xl p-md flex flex-col gap-md relative overflow-hidden">
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-secondary/10 rounded-full blur-2xl"></div>
+<div class="flex justify-between items-center z-10">
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Heute</h3>
+<div class="flex gap-xs">
+<button class="glass-button w-8 h-8 rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">chevron_left</span></button>
+<button class="glass-button w-8 h-8 rounded-full flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">chevron_right</span></button>
+</div>
+</div>
+<!-- Mini Calendar Grid -->
+<div class="flex flex-col gap-xs z-10">
+<!-- Event 1 -->
+<div class="flex items-stretch gap-sm">
+<div class="w-12 text-right pt-1 font-label-md text-label-md text-on-surface-variant">09:00</div>
+<div class="relative flex-1 bg-surface-container-low border-l-2 border-secondary rounded-r-lg p-sm">
+<div class="font-headline-md text-headline-md text-sm text-on-surface">Team Sync</div>
+<div class="font-body-md text-[10px] text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px]">videocam</span> Video Call
+                            </div>
+</div>
+</div>
+<!-- Current Time Line -->
+<div class="flex items-center gap-sm relative py-1">
+<div class="w-12 text-right font-label-md text-[10px] text-secondary">10:45</div>
+<div class="flex-1 h-[1px] bg-secondary relative">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_#06b6d4]"></div>
+</div>
+</div>
+<!-- Event 2 -->
+<div class="flex items-stretch gap-sm">
+<div class="w-12 text-right pt-1 font-label-md text-label-md text-on-surface-variant">11:30</div>
+<div class="flex-1 bg-primary-container/20 border-l-2 border-primary-container rounded-r-lg p-sm">
+<div class="font-headline-md text-headline-md text-sm text-on-surface">Client Discovery</div>
+<div class="font-body-md text-[10px] text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-[12px]">person</span> Sarah Jenkins
+                            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Features Horizontal Scroll -->
+<div class="flex overflow-x-auto hide-scrollbar gap-md pb-sm snap-x">
+<!-- Smart Routing Card -->
+<div class="glass-panel rounded-xl p-md min-w-[240px] snap-center flex flex-col gap-sm">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary border border-secondary/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">route</span>
+</div>
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mt-sm">Smart Routing</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">
+                        Leitet Anfragen basierend auf Verfügbarkeit automatisch an das richtige Teammitglied weiter.
+                    </p>
+</div>
+<!-- Analytics Card -->
+<div class="glass-panel rounded-xl p-md min-w-[240px] snap-center flex flex-col gap-sm">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary-container border border-primary-container/20">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
+</div>
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mt-sm">Deep Analytics</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">
+                        Echtzeit-Einblicke in Meeting-Zeiten und Team-Auslastung auf einen Blick.
+                    </p>
+</div>
+</div>
+</section>
+</main>
+<!-- Mobile Footer (Adapted from JSON) -->
+<footer class="bg-surface-container-lowest w-full py-xl border-t border-outline-variant/20 flex flex-col items-center px-container-margin md:hidden gap-md">
+<div class="font-headline-md text-headline-md text-on-surface mb-sm">SoVoice</div>
+<div class="flex flex-col items-center gap-sm font-body-md text-body-md">
+<a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">Impressum</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">Datenschutz</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">AGB</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors" href="#">Kontakt</a>
+</div>
+<div class="text-on-surface-variant font-label-md text-[10px] mt-md opacity-60">
+            © 2024 SoVoice. Alle Rechte vorbehalten.
+        </div>
+</footer>
+</body></html>

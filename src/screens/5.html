@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Termin Details - SoVoice</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#bec6e0",
+                        "surface": "#0c1324",
+                        "outline-variant": "#434655",
+                        "tertiary-fixed": "#dae2fd",
+                        "on-surface": "#dce1fb",
+                        "on-primary": "#002a78",
+                        "surface-bright": "#33394c",
+                        "on-error-container": "#ffdad6",
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#eef0ff",
+                        "tertiary-fixed-dim": "#bec6e0",
+                        "inverse-surface": "#dce1fb",
+                        "surface-container-highest": "#2e3447",
+                        "on-tertiary-fixed-variant": "#3f465c",
+                        "surface-container-high": "#23293c",
+                        "on-surface-variant": "#c3c6d7",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "outline": "#8d90a0",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "background": "#0c1324",
+                        "on-tertiary": "#283044",
+                        "surface-variant": "#2e3447",
+                        "secondary-container": "#03b5d3",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-container": "#656d84",
+                        "primary-container": "#2563eb",
+                        "primary": "#b4c5ff",
+                        "surface-container-low": "#151b2d",
+                        "surface-container-lowest": "#070d1f",
+                        "surface-tint": "#b4c5ff",
+                        "inverse-primary": "#0053db",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-tertiary-fixed": "#131b2e",
+                        "secondary": "#4cd7f6",
+                        "inverse-on-surface": "#2a3043",
+                        "on-secondary": "#003640",
+                        "on-secondary-container": "#00424e",
+                        "surface-container": "#191f31",
+                        "on-primary-fixed": "#00174b",
+                        "on-background": "#dce1fb",
+                        "secondary-fixed": "#acedff",
+                        "on-secondary-fixed": "#001f26",
+                        "primary-fixed": "#dbe1ff",
+                        "surface-dim": "#0c1324"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "40px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "gutter": "20px",
+                        "container-margin": "32px",
+                        "base": "4px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-sm": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-sm": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(21, 27, 45, 0.6); /* surface-container-low */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .form-input {
+            background-color: #070d1f; /* surface-container-lowest */
+            border: 1px solid rgba(67, 70, 85, 0.5); /* outline-variant */
+            color: #dce1fb; /* on-surface */
+            transition: all 0.2s ease;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #2563eb; /* primary-container */
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2) inset;
+        }
+        .custom-checkbox:checked + div {
+            background-color: #2563eb;
+            border-color: #2563eb;
+        }
+        .custom-checkbox:checked + div svg {
+            opacity: 1;
+        }
+        
+        /* Custom Scrollbar for Textareas */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(67, 70, 85, 0.5);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(195, 198, 215, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen relative selection:bg-primary-container selection:text-white">
+<!-- Ambient Background Glows -->
+<div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+<div class="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] rounded-full bg-primary-container/10 blur-[120px]"></div>
+<div class="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] rounded-full bg-secondary-container/5 blur-[100px]"></div>
+</div>
+<!-- Minimal Header (Transactional Navigation Suppression) -->
+<header class="relative z-10 w-full px-container-margin py-lg flex justify-between items-center">
+<button class="flex items-center gap-sm text-on-surface-variant hover:text-on-surface transition-colors font-label-md text-label-md group uppercase tracking-widest">
+<span class="material-symbols-outlined text-[18px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+            Zurück zur Datumsauswahl
+        </button>
+<div class="font-display-sm text-display-sm text-primary tracking-tighter">SoVoice</div>
+<div class="w-24"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content Canvas -->
+<main class="relative z-10 w-full max-w-7xl mx-auto px-container-margin pb-xl flex flex-col lg:flex-row gap-lg items-start justify-center mt-md">
+<!-- Left Column: Summary Card -->
+<aside class="w-full lg:w-[380px] shrink-0 sticky top-lg">
+<div class="glass-panel rounded-xl p-lg shadow-[0_8px_32px_rgba(0,0,0,0.4)] relative overflow-hidden group">
+<!-- Subtle top border glow -->
+<div class="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary-container/50 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-lg">Ihre Auswahl</h2>
+<div class="flex flex-col gap-md">
+<!-- Event Details -->
+<div class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center shrink-0 border border-white/5">
+<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">videocam</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest mb-xs">Meeting-Typ</div>
+<div class="font-body-lg text-body-lg font-semibold">SoVoice System Demo &amp; Beratung</div>
+<div class="font-body-md text-body-md text-on-surface-variant mt-xs flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">schedule</span> 30 Minuten
+                            </div>
+</div>
+</div>
+<div class="h-[1px] w-full bg-outline-variant/30 my-sm"></div>
+<!-- Time Selected -->
+<div class="flex items-start gap-md">
+<div class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center shrink-0 border border-primary-container/20">
+<span class="material-symbols-outlined text-primary-container text-[20px]" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-primary uppercase tracking-widest mb-xs">Ausgewählter Termin</div>
+<div class="font-body-lg text-body-lg font-semibold text-primary">Montag, 12. August</div>
+<div class="font-body-lg text-body-lg text-on-surface mt-xs">10:30 Uhr</div>
+<div class="font-label-md text-label-md text-on-surface-variant mt-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">public</span> Mitteleuropäische Zeit (MEZ)
+                            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Trust Indicators -->
+<div class="mt-lg flex items-center justify-center gap-md opacity-60">
+<span class="material-symbols-outlined text-[20px]">lock</span>
+<span class="font-label-md text-label-md uppercase tracking-widest">Sichere Buchung</span>
+</div>
+</aside>
+<!-- Right Column: Booking Form -->
+<section class="w-full lg:flex-1 max-w-3xl">
+<div class="glass-panel rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.3)] overflow-hidden">
+<!-- Form Header -->
+<div class="px-xl py-lg border-b border-outline-variant/20 bg-surface-container-highest/30">
+<h1 class="font-display-sm text-display-sm text-on-surface mb-xs">Details eingeben</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Bitte füllen Sie das Formular aus, um den Termin zu bestätigen.</p>
+</div>
+<!-- Form Body -->
+<form class="p-xl flex flex-col gap-lg">
+<!-- Name Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant mb-sm block uppercase tracking-widest">Vorname *</label>
+<input class="form-input w-full rounded-lg px-md py-[12px] font-body-md text-body-md placeholder-on-surface-variant/40" placeholder="Max" required="" type="text"/>
+</div>
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant mb-sm block uppercase tracking-widest">Nachname *</label>
+<input class="form-input w-full rounded-lg px-md py-[12px] font-body-md text-body-md placeholder-on-surface-variant/40" placeholder="Mustermann" required="" type="text"/>
+</div>
+</div>
+<!-- Contact Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant mb-sm block uppercase tracking-widest">E-Mail *</label>
+<input class="form-input w-full rounded-lg px-md py-[12px] font-body-md text-body-md placeholder-on-surface-variant/40" placeholder="max@unternehmen.de" required="" type="email"/>
+</div>
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant mb-sm block uppercase tracking-widest">Telefonnummer</label>
+<input class="form-input w-full rounded-lg px-md py-[12px] font-body-md text-body-md placeholder-on-surface-variant/40" placeholder="+49 123 456789" type="tel"/>
+</div>
+</div>
+<!-- Company & Industry Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant mb-sm block uppercase tracking-widest">Firmenname</label>
+<input class="form-input w-full rounded-lg px-md py-[12px] font-body-md text-body-md placeholder-on-surface-variant/40" placeholder="Unternehmen GmbH" type="text"/>
+</div>
+<div class="relative">
+<label class="font-label-md text-label-md text-on-surface-variant mb-sm block uppercase tracking-widest">Branche *</label>
+<div class="relative">
+<select class="form-input w-full rounded-lg px-md py-[12px] font-body-md text-body-md appearance-none cursor-pointer pr-xl bg-surface-container-lowest" required="">
+<option class="text-on-surface-variant/40" disabled="" selected="" value="">Bitte wählen...</option>
+<option value="arztpraxis">Arztpraxis / Medizin</option>
+<option value="garage">Garage / Autohaus</option>
+<option value="fitnessstudio">Fitnessstudio</option>
+<option value="bildung">Bildungsanbieter</option>
+<option value="kanzlei">Kanzlei</option>
+<option value="versicherung">Versicherung / Broker</option>
+<option value="handwerk">Handwerk</option>
+<option value="immobilien">Immobilien</option>
+<option value="reinigung">Reinigung / Umzug</option>
+<option value="andere">Andere Branche</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Textarea 1 -->
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant mb-sm block uppercase tracking-widest">Was soll SoVoice für dich automatisieren?</label>
+<textarea class="form-input w-full rounded-lg px-md py-md font-body-md text-body-md placeholder-on-surface-variant/40 resize-y min-h-[80px]" placeholder="Z.B. Terminvereinbarungen, FAQ-Beantwortung..." rows="3"></textarea>
+</div>
+<!-- Textarea 2 -->
+<div>
+<label class="font-label-md text-label-md text-on-surface-variant mb-sm block uppercase tracking-widest">Was möchtest du im Termin besprechen?</label>
+<textarea class="form-input w-full rounded-lg px-md py-md font-body-md text-body-md placeholder-on-surface-variant/40 resize-y min-h-[80px]" placeholder="Z.B. Integration in unser bestehendes CRM, Preismodelle..." rows="3"></textarea>
+</div>
+<!-- Privacy Checkbox -->
+<div class="mt-sm flex items-start gap-md">
+<label class="relative flex items-start cursor-pointer group mt-xs">
+<input class="custom-checkbox peer sr-only" required="" type="checkbox"/>
+<div class="w-5 h-5 rounded-[4px] border border-outline-variant flex items-center justify-center transition-colors bg-surface-container-lowest group-hover:border-primary-container peer-focus:ring-2 peer-focus:ring-primary-container/30">
+<svg class="w-3.5 h-3.5 text-white opacity-0 transition-opacity" fill="none" stroke="currentColor" stroke-width="3" viewbox="0 0 24 24">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+</label>
+<div class="font-body-md text-body-md text-on-surface-variant pt-xs">
+                            Ich akzeptiere die <a class="text-primary hover:underline transition-all" href="#">Datenschutzbestimmungen</a> und willige ein, dass meine Daten zur Bearbeitung meiner Anfrage gespeichert werden. *
+                        </div>
+</div>
+<!-- Submit Actions -->
+<div class="mt-lg pt-lg border-t border-outline-variant/20 flex flex-col items-center">
+<button class="bg-primary-container hover:bg-[#1d4ed8] text-white font-headline-md text-headline-md py-[16px] px-xl rounded-lg w-full flex justify-center items-center gap-sm transition-all duration-300 relative overflow-hidden group shadow-[0_4px_16px_rgba(37,99,235,0.3)] hover:shadow-[0_8px_24px_rgba(37,99,235,0.4)]" type="submit">
+<!-- Button Shine Effect -->
+<div class="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none"></div>
+                            
+                            Termin bestätigen
+                            <span class="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<p class="font-label-md text-label-md text-on-surface-variant mt-md flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">mark_email_read</span>
+                            Du erhältst direkt nach der Buchung eine Bestätigung per E-Mail.
+                        </p>
+</div>
+</form>
+</div>
+</section>
+</main>
+<!-- Tailwind Arbitrary Keyframes for micro-interactions -->
+<style>
+        @keyframes shimmer {
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    </style>
+</body></html>
