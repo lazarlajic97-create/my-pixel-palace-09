@@ -11,8 +11,6 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
-import { RouteTransition } from "../components/RouteTransition";
-
 
 function NotFoundComponent() {
   return (
@@ -58,11 +56,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SoVoice Calendar – KI Telefonagent Demo buchen" },
-      { name: "description", content: "Buche deinen SoVoice Demo Termin in wenigen Sekunden. Erfahre, wie ein KI Telefonagent deine Anrufe automatisiert und dein Team entlastet." },
-      { property: "og:title", content: "SoVoice Calendar" },
-      { property: "og:description", content: "Die Terminbuchungsplattform für SoVoice Demo Calls und Beratungen." },
+      { title: "ndawsda" },
+      { name: "description", content: "frewrqdfb" },
+      { property: "og:title", content: "ndawsda" },
+      { property: "og:description", content: "frewrqdfb" },
       { property: "og:type", content: "website" },
+      { name: "twitter:title", content: "ndawsda" },
+      { name: "twitter:description", content: "frewrqdfb" },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/963a600b-d306-4617-99c8-007ed99086de/id-preview-6ff57782--ef2bd4c5-cdfc-45b3-a9db-2ecc2c138c9e.lovable.app-1782178491197.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/963a600b-d306-4617-99c8-007ed99086de/id-preview-6ff57782--ef2bd4c5-cdfc-45b3-a9db-2ecc2c138c9e.lovable.app-1782178491197.png" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -93,9 +96,7 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <RouteTransition />
       <Outlet />
     </QueryClientProvider>
   );
 }
-
