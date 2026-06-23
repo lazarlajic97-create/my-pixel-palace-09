@@ -9,27 +9,189 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RescheduleRouteImport } from './routes/reschedule'
+import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as DatenschutzRouteImport } from './routes/datenschutz'
+import { Route as CancelRouteImport } from './routes/cancel'
+import { Route as BookRouteImport } from './routes/book'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as BookConfirmedRouteImport } from './routes/book.confirmed'
 
-export interface FileRoutesByFullPath {}
-export interface FileRoutesByTo {}
+const RescheduleRoute = RescheduleRouteImport.update({
+  id: '/reschedule',
+  path: '/reschedule',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ImpressumRoute = ImpressumRouteImport.update({
+  id: '/impressum',
+  path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatenschutzRoute = DatenschutzRouteImport.update({
+  id: '/datenschutz',
+  path: '/datenschutz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CancelRoute = CancelRouteImport.update({
+  id: '/cancel',
+  path: '/cancel',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookRoute = BookRouteImport.update({
+  id: '/book',
+  path: '/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookConfirmedRoute = BookConfirmedRouteImport.update({
+  id: '/confirmed',
+  path: '/confirmed',
+  getParentRoute: () => BookRoute,
+} as any)
+
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '/book': typeof BookRouteWithChildren
+  '/cancel': typeof CancelRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/reschedule': typeof RescheduleRoute
+  '/book/confirmed': typeof BookConfirmedRoute
+}
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/book': typeof BookRouteWithChildren
+  '/cancel': typeof CancelRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/reschedule': typeof RescheduleRoute
+  '/book/confirmed': typeof BookConfirmedRoute
+}
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/book': typeof BookRouteWithChildren
+  '/cancel': typeof CancelRoute
+  '/datenschutz': typeof DatenschutzRoute
+  '/impressum': typeof ImpressumRoute
+  '/reschedule': typeof RescheduleRoute
+  '/book/confirmed': typeof BookConfirmedRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: never
+  fullPaths:
+    | '/'
+    | '/book'
+    | '/cancel'
+    | '/datenschutz'
+    | '/impressum'
+    | '/reschedule'
+    | '/book/confirmed'
   fileRoutesByTo: FileRoutesByTo
-  to: never
-  id: '__root__'
+  to:
+    | '/'
+    | '/book'
+    | '/cancel'
+    | '/datenschutz'
+    | '/impressum'
+    | '/reschedule'
+    | '/book/confirmed'
+  id:
+    | '__root__'
+    | '/'
+    | '/book'
+    | '/cancel'
+    | '/datenschutz'
+    | '/impressum'
+    | '/reschedule'
+    | '/book/confirmed'
   fileRoutesById: FileRoutesById
 }
-export interface RootRouteChildren {}
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {}
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  BookRoute: typeof BookRouteWithChildren
+  CancelRoute: typeof CancelRoute
+  DatenschutzRoute: typeof DatenschutzRoute
+  ImpressumRoute: typeof ImpressumRoute
+  RescheduleRoute: typeof RescheduleRoute
 }
 
-const rootRouteChildren: RootRouteChildren = {}
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/reschedule': {
+      id: '/reschedule'
+      path: '/reschedule'
+      fullPath: '/reschedule'
+      preLoaderRoute: typeof RescheduleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/impressum': {
+      id: '/impressum'
+      path: '/impressum'
+      fullPath: '/impressum'
+      preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/datenschutz': {
+      id: '/datenschutz'
+      path: '/datenschutz'
+      fullPath: '/datenschutz'
+      preLoaderRoute: typeof DatenschutzRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cancel': {
+      id: '/cancel'
+      path: '/cancel'
+      fullPath: '/cancel'
+      preLoaderRoute: typeof CancelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book': {
+      id: '/book'
+      path: '/book'
+      fullPath: '/book'
+      preLoaderRoute: typeof BookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book/confirmed': {
+      id: '/book/confirmed'
+      path: '/confirmed'
+      fullPath: '/book/confirmed'
+      preLoaderRoute: typeof BookConfirmedRouteImport
+      parentRoute: typeof BookRoute
+    }
+  }
+}
+
+interface BookRouteChildren {
+  BookConfirmedRoute: typeof BookConfirmedRoute
+}
+
+const BookRouteChildren: BookRouteChildren = {
+  BookConfirmedRoute: BookConfirmedRoute,
+}
+
+const BookRouteWithChildren = BookRoute._addFileChildren(BookRouteChildren)
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  BookRoute: BookRouteWithChildren,
+  CancelRoute: CancelRoute,
+  DatenschutzRoute: DatenschutzRoute,
+  ImpressumRoute: ImpressumRoute,
+  RescheduleRoute: RescheduleRoute,
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
