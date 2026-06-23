@@ -7,8 +7,9 @@ export function RouteTransition() {
   });
   const [visible, setVisible] = useState(false);
   const [progress, setProgress] = useState(0);
-  const showDelay = useRef<ReturnType<typeof setTimeout>>();
-  const hideDelay = useRef<ReturnType<typeof setTimeout>>();
+  const showDelay = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const hideDelay = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+
 
   useEffect(() => {
     let raf: number | undefined;
