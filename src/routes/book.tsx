@@ -141,10 +141,12 @@ function BookPage() {
           </aside>
 
           {/* RIGHT: dynamic step */}
-          <div className="glass-strong p-5 md:p-8">
+          <div className="glass-strong p-5 md:p-8 relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(96,165,250,0.6)] to-transparent" />
             {step === "event" && (
-              <div>
+              <div key="event" className="animate-fade-up">
                 <h3 className="text-lg font-semibold mb-1">Wähle deine Terminart</h3>
+
                 <p className="text-sm text-[color:var(--color-text-muted)] mb-6">Alle Termine sind unverbindlich.</p>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {EVENT_TYPES.map(et => {
