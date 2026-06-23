@@ -287,7 +287,7 @@ function Section({ title, desc, actions, children }: { title: string; desc: stri
     </div>
   );
 }
-function Input({ label, value, onChange, ...rest }: { label: string; value: string; onChange: (v: string) => void } & React.InputHTMLAttributes<HTMLInputElement>) {
+function Input({ label, value, onChange, ...rest }: { label: string; value: string; onChange: (v: string) => void } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "value" | "onChange">) {
   return (
     <label className="block">
       <span className="text-xs font-medium text-[color:var(--color-text-muted)] mb-1.5 block">{label}</span>
