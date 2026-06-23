@@ -1,15 +1,231 @@
-import { createFileRoute } from "@tanstack/react-router";
-import raw from "../screens/8.html?raw";
-import { Screen } from "../components/Screen";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { PublicLayout } from "@/components/PublicLayout";
+import { BookingCalendar, TimeSlots, formatDateDE } from "@/components/BookingCalendar";
+import { EVENT_TYPES, INDUSTRIES, TIME_SLOTS } from "@/lib/sovoice-data";
+import { useState } from "react";
+import { Clock, Video, Check, ArrowLeft, ArrowRight } from "lucide-react";
 
-export const Route = createFileRoute("/book")({
-  head: () => ({
-    meta: [
-      { title: "Termin wählen – SoVoice" },
-      { name: "description", content: "Wählen Sie einen passenden Termin für Ihre Strategie Consultation." },
-      { property: "og:title", content: "Termin wählen – SoVoice" },
-      { property: "og:description", content: "Wählen Sie einen passenden Termin für Ihre Strategie Consultation." },
-    ],
-  }),
-  component: () => <Screen html={raw} />,
-});
+export const Route = createFileRoute("/book")({ component: BookPage });
+
+type Step = "event" | "slot" | "form";
+
+function BookPage() {
+  const navigate = useNavigate();
+  const [step, setStep] = useState<Step>("event");
+  const [eventId, setEventId] = useState<string>("demo");
+  const [date, setDate] = useState<Date | null>(null);
+  const [time, setTime] = useState<string | null>(null);
+  const [form, setForm] = useState({
+    firstName: "", lastName: "", email: "", phone: "", company: "", industry: INDUSTRIES[0],
+    website: "", callVolume: "", automate: "", notes: "", consent: false,
+  });
+  const [errors, setErrors] = useState<Record<string,string>>({});
+
+  const event = EVENT_TYPES.find(e => e.id === eventId)!;
+
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    const err: Record<string,string> = {};
+    if (!form.firstName) err.firstName = "Pflichtfeld";
+    if (!form.lastName) err.lastName = "Pflichtfeld";
+    if (!form.email || !/^\S+@\S+\.\S+$/.test(form.email)) err.email = "Bitte gib eine gültige E Mail Adresse ein.";
+    if (!form.phone) err.phone = "Pflichtfeld";
+    if (!form.company) err.company = "Pflichtfeld";
+    if (!form.consent) err.consent = "Bitte akzeptiere die Datenschutzbestimmungen.";
+    setErrors(err);
+    if (Object.keys(err).length) return;
+    navigate({ to: "/book/confirmed", search: { event: eventId, date: date?.toISOString() ?? "", time: time ?? "", name: `${form.firstName} ${form.lastName}` } as any });
+  }
+
+  return (
+    <PublicLayout>
+      <div className="container-app py-8 md:py-12">
+        {/* Stepper */}
+        <ol className="flex items-center gap-2 text-xs text-[color:var(--color-text-muted)] mb-6">
+          {[
+            {id:"event",l:"Terminart"},
+            {id:"slot",l:"Zeitpunkt"},
+            {id:"form",l:"Daten"},
+          ].map((s,i,arr) => {
+            const active = step === s.id;
+            const done = arr.findIndex(x=>x.id===step) > i;
+            return (
+              <li key={s.id} className="flex items-center gap-2">
+                <span className={`h-6 w-6 grid place-items-center rounded-full text-[11px] font-semibold border ${
+                  active ? "border-[#60a5fa] bg-[rgba(37,99,235,0.2)] text-white" :
+                  done ? "border-[color:var(--color-success)] bg-[rgba(52,211,153,0.15)] text-[color:var(--color-success)]" :
+                  "border-[color:var(--color-border-strong)]"
+                }`}>{done ? <Check className="h-3 w-3" /> : i+1}</span>
+                <span className={active ? "text-white font-medium" : ""}>{s.l}</span>
+                {i<arr.length-1 && <span className="w-8 h-px bg-[color:var(--color-border-strong)]" />}
+              </li>
+            );
+          })}
+        </ol>
+
+        <div className="grid lg:grid-cols-[380px_minmax(0,1fr)] gap-6">
+          {/* LEFT: Event info */}
+          <aside className="glass-strong p-6 h-fit lg:sticky lg:top-24">
+            <div className={`h-12 w-12 rounded-xl bg-gradient-to-br ${event.color} grid place-items-center mb-4`}>
+              <Video className="h-5 w-5 text-white" />
+            </div>
+            <div className="text-xs text-[color:var(--color-text-muted)]">SoVoice Calendar</div>
+            <h2 className="text-xl font-semibold mt-1">{event.title}</h2>
+            <div className="mt-2 flex items-center gap-3 text-xs text-[color:var(--color-text-muted)]">
+              <span className="inline-flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> {event.duration} Minuten</span>
+              <span className="inline-flex items-center gap-1.5"><Video className="h-3.5 w-3.5" /> Online · Google Meet</span>
+            </div>
+            <p className="mt-4 text-sm text-[color:var(--color-text-muted)]">{event.description}</p>
+
+            <div className="mt-5 pt-5 border-t border-[color:var(--color-border)]">
+              <div className="text-xs font-semibold mb-2 text-[color:var(--color-text-muted)]">Das erwartet dich</div>
+              <ul className="space-y-2 text-sm">
+                {["Live Demo des KI Telefonagenten","Analyse deines aktuellen Telefonprozesses","Einschätzung zum Automatisierungspotenzial","Nächste Schritte für Integration"].map(b => (
+                  <li key={b} className="flex items-start gap-2">
+                    <Check className="h-4 w-4 text-[color:var(--color-success)] mt-0.5 shrink-0" />
+                    <span className="text-[color:var(--color-text-muted)]">{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {(date || time) && (
+              <div className="mt-5 pt-5 border-t border-[color:var(--color-border)] text-sm">
+                {date && <div className="text-[color:var(--color-text-muted)]">{formatDateDE(date)}</div>}
+                {time && <div className="font-semibold mt-1">{time} – {addMinutes(time, event.duration)} (CET)</div>}
+              </div>
+            )}
+          </aside>
+
+          {/* RIGHT: dynamic step */}
+          <div className="glass-strong p-5 md:p-8">
+            {step === "event" && (
+              <div>
+                <h3 className="text-lg font-semibold mb-1">Wähle deine Terminart</h3>
+                <p className="text-sm text-[color:var(--color-text-muted)] mb-6">Alle Termine sind unverbindlich.</p>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {EVENT_TYPES.map(et => {
+                    const selected = eventId === et.id;
+                    return (
+                      <button key={et.id} onClick={() => setEventId(et.id)} className={`text-left p-4 rounded-xl border transition ${
+                        selected ? "border-[#60a5fa] bg-[rgba(37,99,235,0.08)] glow-accent" : "border-[color:var(--color-border-strong)] bg-white/[0.02] hover:border-[rgba(59,130,246,0.4)]"
+                      }`}>
+                        <div className={`h-9 w-9 rounded-lg bg-gradient-to-br ${et.color} grid place-items-center mb-3`}>
+                          <Video className="h-4 w-4 text-white" />
+                        </div>
+                        <div className="font-semibold text-sm">{et.title}</div>
+                        <div className="text-xs text-[color:var(--color-text-muted)] mt-1">{et.duration} Minuten · Online</div>
+                        <div className="text-xs text-[color:var(--color-text-muted)] mt-2 line-clamp-2">{et.description}</div>
+                      </button>
+                    );
+                  })}
+                </div>
+                <div className="mt-6 flex justify-end">
+                  <button onClick={() => setStep("slot")} className="btn-primary">Weiter <ArrowRight className="h-4 w-4" /></button>
+                </div>
+              </div>
+            )}
+
+            {step === "slot" && (
+              <div>
+                <h3 className="text-lg font-semibold mb-1">Wähle einen Zeitpunkt</h3>
+                <p className="text-sm text-[color:var(--color-text-muted)] mb-6">Alle Zeiten werden in deiner lokalen Zeitzone angezeigt.</p>
+                <div className="grid md:grid-cols-[1fr_280px] gap-6">
+                  <BookingCalendar value={date} onChange={(d) => { setDate(d); setTime(null); }} />
+                  <div>
+                    <div className="text-sm font-semibold mb-3">
+                      {date ? formatDateDE(date) : "Datum wählen"}
+                    </div>
+                    {date ? (
+                      <TimeSlots value={time} onChange={setTime} slots={TIME_SLOTS} />
+                    ) : (
+                      <div className="glass p-6 text-center text-xs text-[color:var(--color-text-muted)]">
+                        Bitte zuerst ein Datum auswählen.
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="mt-6 flex justify-between">
+                  <button onClick={() => setStep("event")} className="btn-secondary"><ArrowLeft className="h-4 w-4" /> Zurück</button>
+                  <button disabled={!date || !time} onClick={() => setStep("form")} className="btn-primary disabled:opacity-40 disabled:cursor-not-allowed">Weiter <ArrowRight className="h-4 w-4" /></button>
+                </div>
+              </div>
+            )}
+
+            {step === "form" && (
+              <form onSubmit={submit}>
+                <h3 className="text-lg font-semibold mb-1">Deine Daten</h3>
+                <p className="text-sm text-[color:var(--color-text-muted)] mb-6">Damit wir den Termin optimal vorbereiten können.</p>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <Field label="Vorname" error={errors.firstName}>
+                    <input className="input-field" value={form.firstName} onChange={e=>setForm({...form,firstName:e.target.value})} />
+                  </Field>
+                  <Field label="Nachname" error={errors.lastName}>
+                    <input className="input-field" value={form.lastName} onChange={e=>setForm({...form,lastName:e.target.value})} />
+                  </Field>
+                  <Field label="E Mail" error={errors.email}>
+                    <input type="email" className="input-field" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} />
+                  </Field>
+                  <Field label="Telefonnummer" error={errors.phone}>
+                    <input className="input-field" value={form.phone} onChange={e=>setForm({...form,phone:e.target.value})} />
+                  </Field>
+                  <Field label="Firmenname" error={errors.company}>
+                    <input className="input-field" value={form.company} onChange={e=>setForm({...form,company:e.target.value})} />
+                  </Field>
+                  <Field label="Branche">
+                    <select className="input-field" value={form.industry} onChange={e=>setForm({...form,industry:e.target.value})}>
+                      {INDUSTRIES.map(i => <option key={i} value={i} className="bg-[#0e1426]">{i}</option>)}
+                    </select>
+                  </Field>
+                  <Field label="Webseite (optional)">
+                    <input className="input-field" placeholder="https://" value={form.website} onChange={e=>setForm({...form,website:e.target.value})} />
+                  </Field>
+                  <Field label="Anrufe pro Tag (ca.)">
+                    <input className="input-field" placeholder="z. B. 30" value={form.callVolume} onChange={e=>setForm({...form,callVolume:e.target.value})} />
+                  </Field>
+                </div>
+                <div className="mt-4">
+                  <Field label="Was soll SoVoice für dich automatisieren?">
+                    <input className="input-field" placeholder="z. B. Terminbuchung, Rückrufe, FAQs" value={form.automate} onChange={e=>setForm({...form,automate:e.target.value})} />
+                  </Field>
+                </div>
+                <div className="mt-4">
+                  <Field label="Was möchtest du im Termin besprechen?">
+                    <textarea rows={4} className="input-field resize-none" value={form.notes} onChange={e=>setForm({...form,notes:e.target.value})} />
+                  </Field>
+                </div>
+                <label className="mt-5 flex items-start gap-3 text-sm cursor-pointer">
+                  <input type="checkbox" checked={form.consent} onChange={e=>setForm({...form,consent:e.target.checked})} className="mt-0.5 h-4 w-4 rounded border-[color:var(--color-border-strong)] bg-white/5 text-[color:var(--color-brand)]" />
+                  <span className="text-[color:var(--color-text-muted)]">Ich akzeptiere die <Link to="/datenschutz" className="text-[#60a5fa] underline">Datenschutzbestimmungen</Link>.</span>
+                </label>
+                {errors.consent && <div className="mt-1 text-xs text-[color:var(--color-danger)]">{errors.consent}</div>}
+
+                <div className="mt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <button type="button" onClick={() => setStep("slot")} className="btn-secondary"><ArrowLeft className="h-4 w-4" /> Zurück</button>
+                  <div className="text-xs text-[color:var(--color-text-muted)] sm:text-right">Du erhältst direkt nach der Buchung eine Bestätigung per E Mail.</div>
+                  <button type="submit" className="btn-primary">Termin bestätigen</button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      </div>
+    </PublicLayout>
+  );
+}
+
+function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
+  return (
+    <label className="block">
+      <span className="text-xs font-medium text-[color:var(--color-text-muted)] mb-1.5 block">{label}</span>
+      {children}
+      {error && <span className="mt-1 block text-xs text-[color:var(--color-danger)]">{error}</span>}
+    </label>
+  );
+}
+
+function addMinutes(time: string, minutes: number) {
+  const [h,m] = time.split(":").map(Number);
+  const total = h*60 + m + minutes;
+  return `${String(Math.floor(total/60)).padStart(2,"0")}:${String(total%60).padStart(2,"0")}`;
+}
