@@ -43,69 +43,68 @@ function Landing() {
         </CosmicParallaxBg>
 
         {/* Floating preview card overlapping hero */}
-        <div className="container-app -mt-20 md:-mt-28 relative z-20">
-          <div className="grid lg:grid-cols-[1.1fr_1fr] gap-6 items-stretch">
-            <div className="glass-strong p-6 md:p-8 float-slow">
-              <div className="flex items-center justify-between mb-5">
+        <div className="container-app -mt-20 md:-mt-28 relative z-20 max-w-5xl">
+          <div className="grid lg:grid-cols-[1.1fr_1fr] gap-4 items-stretch">
+            <div className="glass-strong p-5 float-slow">
+              <div className="flex items-center justify-between mb-4">
                 <div>
-                  <div className="text-sm font-semibold">SoVoice Demo Call</div>
-                  <div className="text-xs text-[color:var(--color-text-muted)]">30 Minuten · Online via Google Meet</div>
+                  <div className="text-[13px] font-semibold">SoVoice Demo Call</div>
+                  <div className="text-[11px] text-[color:var(--color-text-muted)]">30 Min · Google Meet</div>
                 </div>
-                <span className="chip"><span className="h-1.5 w-1.5 rounded-full bg-[color:var(--color-success)] animate-pulse" /> Live verfügbar</span>
+                <span className="chip text-[10px]"><span className="h-1.5 w-1.5 rounded-full bg-[color:var(--color-success)] animate-pulse" /> Live</span>
               </div>
-              <div className="grid grid-cols-7 gap-1 text-center text-[11px] text-[color:var(--color-text-dim)] mb-2">
+              <div className="grid grid-cols-7 gap-0.5 text-center text-[10px] text-[color:var(--color-text-dim)] mb-1.5">
                 {["Mo","Di","Mi","Do","Fr","Sa","So"].map(d => <div key={d}>{d}</div>)}
               </div>
-              <div className="grid grid-cols-7 gap-1 mb-5">
+              <div className="grid grid-cols-7 gap-0.5 mb-4">
                 {Array.from({length:35}, (_,i) => {
                   const day = i - 2;
                   const valid = day > 0 && day <= 30;
                   const wknd = i % 7 >= 5;
                   const sel = day === 18;
                   return (
-                    <div key={i} className={`aspect-square grid place-items-center rounded-md text-xs transition ${
-                      sel ? "bg-gradient-to-br from-[#3b82f6] to-[#1e40af] text-white shadow-[0_0_18px_-2px_rgba(59,130,246,0.7)] font-semibold scale-105" :
-                      !valid || wknd ? "text-[color:var(--color-text-dim)] opacity-30" : "text-[color:var(--color-text)] hover:bg-white/5 hover:scale-105"
+                    <div key={i} className={`aspect-square grid place-items-center rounded text-[10px] transition ${
+                      sel ? "bg-gradient-to-br from-[#3b82f6] to-[#1e40af] text-white shadow-[0_0_14px_-2px_rgba(59,130,246,0.7)] font-semibold scale-105" :
+                      !valid || wknd ? "text-[color:var(--color-text-dim)] opacity-30" : "text-[color:var(--color-text)] hover:bg-white/5"
                     }`}>{valid ? day : ""}</div>
                   );
                 })}
               </div>
-              <div className="text-xs font-medium text-[color:var(--color-text-muted)] mb-2">Verfügbare Zeiten · Donnerstag, 18. Juni</div>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="text-[11px] font-medium text-[color:var(--color-text-muted)] mb-1.5">Verfügbare Zeiten · Do, 18. Juni</div>
+              <div className="grid grid-cols-4 gap-1.5">
                 {["09:00","10:30","14:00","16:30"].map((t,i) => (
-                  <div key={t} className={`px-2 py-2.5 rounded-lg text-xs text-center font-medium border transition ${i===1 ? "bg-gradient-to-br from-[#3b82f6] to-[#1e40af] text-white border-[#60a5fa] shadow-[0_8px_24px_-8px_rgba(59,130,246,0.6)]" : "border-[color:var(--color-border-strong)] bg-white/[0.02] hover:bg-white/[0.05]"}`}>{t}</div>
+                  <div key={t} className={`px-1 py-1.5 rounded-md text-[11px] text-center font-medium border ${i===1 ? "bg-gradient-to-br from-[#3b82f6] to-[#1e40af] text-white border-[#60a5fa] shadow-[0_6px_18px_-8px_rgba(59,130,246,0.6)]" : "border-[color:var(--color-border-strong)] bg-white/[0.02]"}`}>{t}</div>
                 ))}
               </div>
             </div>
 
-            {/* Side stats / live AI panel */}
-            <div className="grid gap-4">
-              <div className="glass-strong p-5 relative overflow-hidden">
-                <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[rgba(34,211,238,0.25)] blur-3xl" />
-                <div className="relative flex items-start gap-3">
-                  <div className="h-10 w-10 shrink-0 rounded-lg bg-gradient-to-br from-[#22d3ee] to-[#0891b2] grid place-items-center pulse-glow">
-                    <PhoneCall className="h-5 w-5 text-white" />
+            <div className="grid gap-3">
+              <div className="glass-strong p-4 relative overflow-hidden">
+                <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[rgba(34,211,238,0.25)] blur-3xl" />
+                <div className="relative flex items-start gap-2.5">
+                  <div className="h-8 w-8 shrink-0 rounded-lg bg-gradient-to-br from-[#22d3ee] to-[#0891b2] grid place-items-center pulse-glow">
+                    <PhoneCall className="h-4 w-4 text-white" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="text-sm font-semibold">SoVoice Agent · Live</div>
-                    <div className="text-xs text-[color:var(--color-text-muted)] mt-0.5">Antwortet in Echtzeit. Bucht Termine. 24/7 erreichbar.</div>
-                    <div className="mt-3 flex items-end gap-0.5 h-8">
-                      {[6,12,8,14,10,16,9,13,7,11,8,14,10,6,12].map((h,i) => (
-                        <span key={i} className="w-1 rounded-full bg-gradient-to-t from-[#3b82f6] to-[#22d3ee]" style={{height: h*1.6, animation: `float-y ${1 + (i%5)*0.3}s ease-in-out infinite`}} />
+                    <div className="text-[12px] font-semibold">SoVoice Agent · Live</div>
+                    <div className="text-[10px] text-[color:var(--color-text-muted)] mt-0.5">Antwortet in Echtzeit · 24/7 erreichbar.</div>
+                    <div className="mt-2 flex items-end gap-0.5 h-6">
+                      {[6,12,8,14,10,16,9,13,7,11,8,14].map((h,i) => (
+                        <span key={i} className="w-0.5 rounded-full bg-gradient-to-t from-[#3b82f6] to-[#22d3ee]" style={{height: h*1.2, animation: `float-y ${1 + (i%5)*0.3}s ease-in-out infinite`}} />
                       ))}
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 {[
                   { v: "+38%", l: "mehr Buchungen", i: TrendingUp },
                   { v: "<2 Min", l: "Buchungsdauer", i: Clock },
                 ].map(({v,l,i:Icon}) => (
-                  <div key={l} className="glass p-4">
-                    <Icon className="h-4 w-4 text-[color:var(--color-accent)] mb-2" />
-                    <div className="text-2xl font-bold bg-gradient-to-r from-white to-[#93c5fd] bg-clip-text text-transparent">{v}</div>
-                    <div className="text-xs text-[color:var(--color-text-muted)] mt-0.5">{l}</div>
+                  <div key={l} className="glass p-3">
+                    <Icon className="h-3.5 w-3.5 text-[color:var(--color-accent)] mb-1.5" />
+                    <div className="text-lg font-bold bg-gradient-to-r from-white to-[#93c5fd] bg-clip-text text-transparent leading-none">{v}</div>
+                    <div className="text-[10px] text-[color:var(--color-text-muted)] mt-1">{l}</div>
                   </div>
                 ))}
               </div>
@@ -113,6 +112,7 @@ function Landing() {
           </div>
         </div>
       </section>
+
 
       {/* Branchen marquee */}
       <section className="py-12 mt-12 border-y border-[color:var(--color-border)] bg-[color:var(--color-bg-elev)]/40 overflow-hidden">
