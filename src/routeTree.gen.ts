@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RescheduleRouteImport } from './routes/reschedule'
 import { Route as ImpressumRouteImport } from './routes/impressum'
+import { Route as EventsRouteImport } from './routes/events'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as CancelRouteImport } from './routes/cancel'
 import { Route as BookRouteImport } from './routes/book'
@@ -22,6 +23,7 @@ import { Route as AdminIntegrationsRouteImport } from './routes/admin.integratio
 import { Route as AdminEventTypesRouteImport } from './routes/admin.event-types'
 import { Route as AdminAvailabilityRouteImport } from './routes/admin.availability'
 import { Route as AdminAppointmentsRouteImport } from './routes/admin.appointments'
+import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 
 const RescheduleRoute = RescheduleRouteImport.update({
   id: '/reschedule',
@@ -31,6 +33,11 @@ const RescheduleRoute = RescheduleRouteImport.update({
 const ImpressumRoute = ImpressumRouteImport.update({
   id: '/impressum',
   path: '/impressum',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DatenschutzRoute = DatenschutzRouteImport.update({
@@ -88,14 +95,21 @@ const AdminAppointmentsRoute = AdminAppointmentsRouteImport.update({
   path: '/admin/appointments',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
+  id: '/admin/analytics',
+  path: '/admin/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/book': typeof BookRouteWithChildren
   '/cancel': typeof CancelRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/events': typeof EventsRoute
   '/impressum': typeof ImpressumRoute
   '/reschedule': typeof RescheduleRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/appointments': typeof AdminAppointmentsRoute
   '/admin/availability': typeof AdminAvailabilityRoute
   '/admin/event-types': typeof AdminEventTypesRoute
@@ -109,8 +123,10 @@ export interface FileRoutesByTo {
   '/book': typeof BookRouteWithChildren
   '/cancel': typeof CancelRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/events': typeof EventsRoute
   '/impressum': typeof ImpressumRoute
   '/reschedule': typeof RescheduleRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/appointments': typeof AdminAppointmentsRoute
   '/admin/availability': typeof AdminAvailabilityRoute
   '/admin/event-types': typeof AdminEventTypesRoute
@@ -125,8 +141,10 @@ export interface FileRoutesById {
   '/book': typeof BookRouteWithChildren
   '/cancel': typeof CancelRoute
   '/datenschutz': typeof DatenschutzRoute
+  '/events': typeof EventsRoute
   '/impressum': typeof ImpressumRoute
   '/reschedule': typeof RescheduleRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/appointments': typeof AdminAppointmentsRoute
   '/admin/availability': typeof AdminAvailabilityRoute
   '/admin/event-types': typeof AdminEventTypesRoute
@@ -142,8 +160,10 @@ export interface FileRouteTypes {
     | '/book'
     | '/cancel'
     | '/datenschutz'
+    | '/events'
     | '/impressum'
     | '/reschedule'
+    | '/admin/analytics'
     | '/admin/appointments'
     | '/admin/availability'
     | '/admin/event-types'
@@ -157,8 +177,10 @@ export interface FileRouteTypes {
     | '/book'
     | '/cancel'
     | '/datenschutz'
+    | '/events'
     | '/impressum'
     | '/reschedule'
+    | '/admin/analytics'
     | '/admin/appointments'
     | '/admin/availability'
     | '/admin/event-types'
@@ -172,8 +194,10 @@ export interface FileRouteTypes {
     | '/book'
     | '/cancel'
     | '/datenschutz'
+    | '/events'
     | '/impressum'
     | '/reschedule'
+    | '/admin/analytics'
     | '/admin/appointments'
     | '/admin/availability'
     | '/admin/event-types'
@@ -188,8 +212,10 @@ export interface RootRouteChildren {
   BookRoute: typeof BookRouteWithChildren
   CancelRoute: typeof CancelRoute
   DatenschutzRoute: typeof DatenschutzRoute
+  EventsRoute: typeof EventsRoute
   ImpressumRoute: typeof ImpressumRoute
   RescheduleRoute: typeof RescheduleRoute
+  AdminAnalyticsRoute: typeof AdminAnalyticsRoute
   AdminAppointmentsRoute: typeof AdminAppointmentsRoute
   AdminAvailabilityRoute: typeof AdminAvailabilityRoute
   AdminEventTypesRoute: typeof AdminEventTypesRoute
@@ -212,6 +238,13 @@ declare module '@tanstack/react-router' {
       path: '/impressum'
       fullPath: '/impressum'
       preLoaderRoute: typeof ImpressumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/datenschutz': {
@@ -291,6 +324,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAppointmentsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/analytics': {
+      id: '/admin/analytics'
+      path: '/admin/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -309,8 +349,10 @@ const rootRouteChildren: RootRouteChildren = {
   BookRoute: BookRouteWithChildren,
   CancelRoute: CancelRoute,
   DatenschutzRoute: DatenschutzRoute,
+  EventsRoute: EventsRoute,
   ImpressumRoute: ImpressumRoute,
   RescheduleRoute: RescheduleRoute,
+  AdminAnalyticsRoute: AdminAnalyticsRoute,
   AdminAppointmentsRoute: AdminAppointmentsRoute,
   AdminAvailabilityRoute: AdminAvailabilityRoute,
   AdminEventTypesRoute: AdminEventTypesRoute,
@@ -321,13 +363,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

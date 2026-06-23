@@ -21,7 +21,7 @@ function EventTypes() {
             </div>
             <h3 className="font-semibold">{et.title}</h3>
             <div className="mt-1 flex items-center gap-2 text-xs text-[color:var(--color-text-muted)]">
-              <Clock className="h-3.5 w-3.5" /> {et.duration} Minuten
+              <Clock className="h-3.5 w-3.5" /> {et.durationMinutes} Minuten · {et.meetingType}
             </div>
             <p className="mt-3 text-sm text-[color:var(--color-text-muted)] flex-1">{et.description}</p>
             <div className="mt-4 pt-4 border-t border-[color:var(--color-border)] flex gap-2">
