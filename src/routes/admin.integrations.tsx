@@ -21,10 +21,11 @@ function Integrations() {
   return (
     <AdminLayout title="Integrationen" subtitle="Verbinde SoVoice Calendar mit deinen Tools">
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
-        {INTS.map(({ icon: Icon, ...i }) => {
+        {INTS.map(({ icon: Icon, ...i }, idx) => {
           const connected = i.status === "connected";
           return (
-            <div key={i.name} className="glass-strong p-5">
+            <div key={i.name} style={{ animationDelay: `${idx * 40}ms` }} className="glass-strong card-hover p-5 animate-fade-up">
+
               <div className="flex items-start justify-between mb-4">
                 <div className="h-11 w-11 rounded-xl bg-white/5 border border-[color:var(--color-border-strong)] grid place-items-center">
                   <Icon className="h-5 w-5 text-[#60a5fa]" />
