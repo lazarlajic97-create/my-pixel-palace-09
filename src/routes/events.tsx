@@ -16,8 +16,9 @@ function Events() {
         </div>
 
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-          {EVENT_TYPES.filter(e => e.isActive).map(et => (
-            <div key={et.id} className="glass-strong p-6 flex flex-col group hover:border-[rgba(59,130,246,0.35)] transition">
+          {EVENT_TYPES.filter(e => e.isActive).map((et, idx) => (
+            <div key={et.id} style={{ animationDelay: `${idx * 60}ms` }} className="glass-strong card-hover p-6 flex flex-col group animate-fade-up">
+
               <div className="flex items-start justify-between">
                 <div className={`h-12 w-12 rounded-xl bg-gradient-to-br ${et.color} grid place-items-center`}>
                   <Video className="h-5 w-5 text-white" />
