@@ -141,10 +141,12 @@ function BookPage() {
           </aside>
 
           {/* RIGHT: dynamic step */}
-          <div className="glass-strong p-5 md:p-8">
+          <div className="glass-strong p-5 md:p-8 relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(96,165,250,0.6)] to-transparent" />
             {step === "event" && (
-              <div>
+              <div key="event" className="animate-fade-up">
                 <h3 className="text-lg font-semibold mb-1">Wähle deine Terminart</h3>
+
                 <p className="text-sm text-[color:var(--color-text-muted)] mb-6">Alle Termine sind unverbindlich.</p>
                 <div className="grid sm:grid-cols-2 gap-3">
                   {EVENT_TYPES.map(et => {
@@ -170,8 +172,9 @@ function BookPage() {
             )}
 
             {step === "slot" && (
-              <div>
+              <div key="slot" className="animate-fade-up">
                 <h3 className="text-lg font-semibold mb-1">Wähle einen Zeitpunkt</h3>
+
                 <p className="text-sm text-[color:var(--color-text-muted)] mb-6">Alle Zeiten werden in deiner lokalen Zeitzone angezeigt.</p>
                 {errors.slot && <div className="mb-4 text-sm text-[color:var(--color-danger)] glass p-3 border border-[rgba(248,113,113,0.3)]">{errors.slot}</div>}
                 <div className="grid md:grid-cols-[1fr_280px] gap-6">
@@ -197,8 +200,9 @@ function BookPage() {
             )}
 
             {step === "form" && (
-              <form onSubmit={submit}>
+              <form key="form" onSubmit={submit} className="animate-fade-up">
                 <h3 className="text-lg font-semibold mb-1">Deine Daten</h3>
+
                 <p className="text-sm text-[color:var(--color-text-muted)] mb-6">Damit wir den Termin optimal vorbereiten können.</p>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Field label="Vorname" error={errors.firstName}>

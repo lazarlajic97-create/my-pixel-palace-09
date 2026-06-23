@@ -74,12 +74,14 @@ function Analytics() {
 
 function Card({ icon: Icon, label, value, accent }: { icon: any; label: string; value: string; accent: string }) {
   return (
-    <div className="glass-strong p-5">
-      <div className={`h-9 w-9 rounded-lg bg-gradient-to-br ${accent} grid place-items-center`}>
+    <div className="glass-strong card-hover p-5 animate-fade-up relative overflow-hidden">
+      <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-[rgba(59,130,246,0.12)] blur-2xl pointer-events-none" />
+      <div className={`relative h-9 w-9 rounded-lg bg-gradient-to-br ${accent} grid place-items-center shadow-lg`}>
         <Icon className="h-4 w-4 text-white" />
       </div>
-      <div className="mt-4 text-2xl md:text-3xl font-bold">{value}</div>
-      <div className="mt-1 text-xs text-[color:var(--color-text-muted)]">{label}</div>
+      <div className="relative mt-4 text-2xl md:text-3xl font-bold tracking-tight">{value}</div>
+      <div className="relative mt-1 text-xs text-[color:var(--color-text-muted)]">{label}</div>
     </div>
   );
 }
+

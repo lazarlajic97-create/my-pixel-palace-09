@@ -11,8 +11,9 @@ function EventTypes() {
       <button className="btn-primary"><Plus className="h-4 w-4" /> Neuer Event Typ</button>
     }>
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
-        {EVENT_TYPES.map(et => (
-          <div key={et.id} className="glass-strong p-5 flex flex-col">
+        {EVENT_TYPES.map((et, idx) => (
+          <div key={et.id} style={{ animationDelay: `${idx * 50}ms` }} className="glass-strong card-hover p-5 flex flex-col animate-fade-up">
+
             <div className="flex items-start justify-between mb-4">
               <div className={`h-11 w-11 rounded-xl bg-gradient-to-br ${et.color} grid place-items-center`}>
                 <Video className="h-5 w-5 text-white" />
