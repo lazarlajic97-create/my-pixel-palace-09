@@ -200,8 +200,9 @@ function BookPage() {
             )}
 
             {step === "form" && (
-              <form onSubmit={submit}>
+              <form key="form" onSubmit={submit} className="animate-fade-up">
                 <h3 className="text-lg font-semibold mb-1">Deine Daten</h3>
+
                 <p className="text-sm text-[color:var(--color-text-muted)] mb-6">Damit wir den Termin optimal vorbereiten können.</p>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <Field label="Vorname" error={errors.firstName}>
