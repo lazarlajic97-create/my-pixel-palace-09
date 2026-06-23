@@ -5,9 +5,8 @@ import { Menu, X } from "lucide-react";
 
 const nav = [
   { to: "/", label: "Startseite" },
+  { to: "/events", label: "Terminarten" },
   { to: "/book", label: "Termin buchen" },
-  { to: "/reschedule", label: "Verschieben" },
-  { to: "/cancel", label: "Stornieren" },
 ];
 
 export function PublicLayout({ children }: { children: ReactNode }) {
@@ -64,9 +63,8 @@ export function PublicLayout({ children }: { children: ReactNode }) {
           <div>
             <h4 className="text-sm font-semibold mb-3">Plattform</h4>
             <ul className="space-y-2 text-sm text-[color:var(--color-text-muted)]">
+              <li><Link to="/events" className="hover:text-white">Terminarten</Link></li>
               <li><Link to="/book" className="hover:text-white">Termin buchen</Link></li>
-              <li><Link to="/reschedule" className="hover:text-white">Verschieben</Link></li>
-              <li><Link to="/cancel" className="hover:text-white">Stornieren</Link></li>
               <li><Link to="/admin" className="hover:text-white">Admin Bereich</Link></li>
             </ul>
           </div>
