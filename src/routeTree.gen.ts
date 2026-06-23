@@ -9,38 +9,209 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ManageRouteImport } from './routes/manage'
+import { Route as BookRouteImport } from './routes/book'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as ManageEditRouteImport } from './routes/manage.edit'
+import { Route as BookingDetailsDesktopRouteImport } from './routes/booking.details-desktop'
+import { Route as BookingDesktopRouteImport } from './routes/booking.desktop'
+import { Route as BookingConfirmedDesktopRouteImport } from './routes/booking.confirmed-desktop'
+import { Route as BookDetailsRouteImport } from './routes/book.details'
+import { Route as BookConfirmedRouteImport } from './routes/book.confirmed'
+import { Route as AdminMobileRouteImport } from './routes/admin.mobile'
+import { Route as AdminAppointmentsRouteImport } from './routes/admin.appointments'
+import { Route as AdminAppointmentsDesktopRouteImport } from './routes/admin.appointments.desktop'
 
+const ManageRoute = ManageRouteImport.update({
+  id: '/manage',
+  path: '/manage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookRoute = BookRouteImport.update({
+  id: '/book',
+  path: '/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManageEditRoute = ManageEditRouteImport.update({
+  id: '/edit',
+  path: '/edit',
+  getParentRoute: () => ManageRoute,
+} as any)
+const BookingDetailsDesktopRoute = BookingDetailsDesktopRouteImport.update({
+  id: '/booking/details-desktop',
+  path: '/booking/details-desktop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingDesktopRoute = BookingDesktopRouteImport.update({
+  id: '/booking/desktop',
+  path: '/booking/desktop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingConfirmedDesktopRoute = BookingConfirmedDesktopRouteImport.update({
+  id: '/booking/confirmed-desktop',
+  path: '/booking/confirmed-desktop',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookDetailsRoute = BookDetailsRouteImport.update({
+  id: '/details',
+  path: '/details',
+  getParentRoute: () => BookRoute,
+} as any)
+const BookConfirmedRoute = BookConfirmedRouteImport.update({
+  id: '/confirmed',
+  path: '/confirmed',
+  getParentRoute: () => BookRoute,
+} as any)
+const AdminMobileRoute = AdminMobileRouteImport.update({
+  id: '/admin/mobile',
+  path: '/admin/mobile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAppointmentsRoute = AdminAppointmentsRouteImport.update({
+  id: '/admin/appointments',
+  path: '/admin/appointments',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAppointmentsDesktopRoute =
+  AdminAppointmentsDesktopRouteImport.update({
+    id: '/desktop',
+    path: '/desktop',
+    getParentRoute: () => AdminAppointmentsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/book': typeof BookRouteWithChildren
+  '/manage': typeof ManageRouteWithChildren
+  '/admin/appointments': typeof AdminAppointmentsRouteWithChildren
+  '/admin/mobile': typeof AdminMobileRoute
+  '/book/confirmed': typeof BookConfirmedRoute
+  '/book/details': typeof BookDetailsRoute
+  '/booking/confirmed-desktop': typeof BookingConfirmedDesktopRoute
+  '/booking/desktop': typeof BookingDesktopRoute
+  '/booking/details-desktop': typeof BookingDetailsDesktopRoute
+  '/manage/edit': typeof ManageEditRoute
+  '/admin/': typeof AdminIndexRoute
+  '/admin/appointments/desktop': typeof AdminAppointmentsDesktopRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/book': typeof BookRouteWithChildren
+  '/manage': typeof ManageRouteWithChildren
+  '/admin/appointments': typeof AdminAppointmentsRouteWithChildren
+  '/admin/mobile': typeof AdminMobileRoute
+  '/book/confirmed': typeof BookConfirmedRoute
+  '/book/details': typeof BookDetailsRoute
+  '/booking/confirmed-desktop': typeof BookingConfirmedDesktopRoute
+  '/booking/desktop': typeof BookingDesktopRoute
+  '/booking/details-desktop': typeof BookingDetailsDesktopRoute
+  '/manage/edit': typeof ManageEditRoute
+  '/admin': typeof AdminIndexRoute
+  '/admin/appointments/desktop': typeof AdminAppointmentsDesktopRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/book': typeof BookRouteWithChildren
+  '/manage': typeof ManageRouteWithChildren
+  '/admin/appointments': typeof AdminAppointmentsRouteWithChildren
+  '/admin/mobile': typeof AdminMobileRoute
+  '/book/confirmed': typeof BookConfirmedRoute
+  '/book/details': typeof BookDetailsRoute
+  '/booking/confirmed-desktop': typeof BookingConfirmedDesktopRoute
+  '/booking/desktop': typeof BookingDesktopRoute
+  '/booking/details-desktop': typeof BookingDetailsDesktopRoute
+  '/manage/edit': typeof ManageEditRoute
+  '/admin/': typeof AdminIndexRoute
+  '/admin/appointments/desktop': typeof AdminAppointmentsDesktopRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/book'
+    | '/manage'
+    | '/admin/appointments'
+    | '/admin/mobile'
+    | '/book/confirmed'
+    | '/book/details'
+    | '/booking/confirmed-desktop'
+    | '/booking/desktop'
+    | '/booking/details-desktop'
+    | '/manage/edit'
+    | '/admin/'
+    | '/admin/appointments/desktop'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/book'
+    | '/manage'
+    | '/admin/appointments'
+    | '/admin/mobile'
+    | '/book/confirmed'
+    | '/book/details'
+    | '/booking/confirmed-desktop'
+    | '/booking/desktop'
+    | '/booking/details-desktop'
+    | '/manage/edit'
+    | '/admin'
+    | '/admin/appointments/desktop'
+  id:
+    | '__root__'
+    | '/'
+    | '/book'
+    | '/manage'
+    | '/admin/appointments'
+    | '/admin/mobile'
+    | '/book/confirmed'
+    | '/book/details'
+    | '/booking/confirmed-desktop'
+    | '/booking/desktop'
+    | '/booking/details-desktop'
+    | '/manage/edit'
+    | '/admin/'
+    | '/admin/appointments/desktop'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BookRoute: typeof BookRouteWithChildren
+  ManageRoute: typeof ManageRouteWithChildren
+  AdminAppointmentsRoute: typeof AdminAppointmentsRouteWithChildren
+  AdminMobileRoute: typeof AdminMobileRoute
+  BookingConfirmedDesktopRoute: typeof BookingConfirmedDesktopRoute
+  BookingDesktopRoute: typeof BookingDesktopRoute
+  BookingDetailsDesktopRoute: typeof BookingDetailsDesktopRoute
+  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/manage': {
+      id: '/manage'
+      path: '/manage'
+      fullPath: '/manage'
+      preLoaderRoute: typeof ManageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book': {
+      id: '/book'
+      path: '/book'
+      fullPath: '/book'
+      preLoaderRoute: typeof BookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +219,124 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manage/edit': {
+      id: '/manage/edit'
+      path: '/edit'
+      fullPath: '/manage/edit'
+      preLoaderRoute: typeof ManageEditRouteImport
+      parentRoute: typeof ManageRoute
+    }
+    '/booking/details-desktop': {
+      id: '/booking/details-desktop'
+      path: '/booking/details-desktop'
+      fullPath: '/booking/details-desktop'
+      preLoaderRoute: typeof BookingDetailsDesktopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking/desktop': {
+      id: '/booking/desktop'
+      path: '/booking/desktop'
+      fullPath: '/booking/desktop'
+      preLoaderRoute: typeof BookingDesktopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking/confirmed-desktop': {
+      id: '/booking/confirmed-desktop'
+      path: '/booking/confirmed-desktop'
+      fullPath: '/booking/confirmed-desktop'
+      preLoaderRoute: typeof BookingConfirmedDesktopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book/details': {
+      id: '/book/details'
+      path: '/details'
+      fullPath: '/book/details'
+      preLoaderRoute: typeof BookDetailsRouteImport
+      parentRoute: typeof BookRoute
+    }
+    '/book/confirmed': {
+      id: '/book/confirmed'
+      path: '/confirmed'
+      fullPath: '/book/confirmed'
+      preLoaderRoute: typeof BookConfirmedRouteImport
+      parentRoute: typeof BookRoute
+    }
+    '/admin/mobile': {
+      id: '/admin/mobile'
+      path: '/admin/mobile'
+      fullPath: '/admin/mobile'
+      preLoaderRoute: typeof AdminMobileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/appointments': {
+      id: '/admin/appointments'
+      path: '/admin/appointments'
+      fullPath: '/admin/appointments'
+      preLoaderRoute: typeof AdminAppointmentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/appointments/desktop': {
+      id: '/admin/appointments/desktop'
+      path: '/desktop'
+      fullPath: '/admin/appointments/desktop'
+      preLoaderRoute: typeof AdminAppointmentsDesktopRouteImport
+      parentRoute: typeof AdminAppointmentsRoute
+    }
   }
 }
 
+interface BookRouteChildren {
+  BookConfirmedRoute: typeof BookConfirmedRoute
+  BookDetailsRoute: typeof BookDetailsRoute
+}
+
+const BookRouteChildren: BookRouteChildren = {
+  BookConfirmedRoute: BookConfirmedRoute,
+  BookDetailsRoute: BookDetailsRoute,
+}
+
+const BookRouteWithChildren = BookRoute._addFileChildren(BookRouteChildren)
+
+interface ManageRouteChildren {
+  ManageEditRoute: typeof ManageEditRoute
+}
+
+const ManageRouteChildren: ManageRouteChildren = {
+  ManageEditRoute: ManageEditRoute,
+}
+
+const ManageRouteWithChildren =
+  ManageRoute._addFileChildren(ManageRouteChildren)
+
+interface AdminAppointmentsRouteChildren {
+  AdminAppointmentsDesktopRoute: typeof AdminAppointmentsDesktopRoute
+}
+
+const AdminAppointmentsRouteChildren: AdminAppointmentsRouteChildren = {
+  AdminAppointmentsDesktopRoute: AdminAppointmentsDesktopRoute,
+}
+
+const AdminAppointmentsRouteWithChildren =
+  AdminAppointmentsRoute._addFileChildren(AdminAppointmentsRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BookRoute: BookRouteWithChildren,
+  ManageRoute: ManageRouteWithChildren,
+  AdminAppointmentsRoute: AdminAppointmentsRouteWithChildren,
+  AdminMobileRoute: AdminMobileRoute,
+  BookingConfirmedDesktopRoute: BookingConfirmedDesktopRoute,
+  BookingDesktopRoute: BookingDesktopRoute,
+  BookingDetailsDesktopRoute: BookingDetailsDesktopRoute,
+  AdminIndexRoute: AdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

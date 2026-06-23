@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Buchungsdetails - SoVoice</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config from Design System -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#33394c",
+                        "surface-container-low": "#151b2d",
+                        "on-secondary-container": "#00424e",
+                        "surface-container-highest": "#2e3447",
+                        "surface-container-high": "#23293c",
+                        "on-surface-variant": "#c3c6d7",
+                        "secondary-fixed-dim": "#4cd7f6",
+                        "on-tertiary-container": "#eef0ff",
+                        "background": "#0c1324",
+                        "surface-container-lowest": "#070d1f",
+                        "primary": "#b4c5ff",
+                        "outline": "#8d90a0",
+                        "on-primary-fixed": "#00174b",
+                        "on-tertiary-fixed": "#131b2e",
+                        "on-background": "#dce1fb",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-tint": "#b4c5ff",
+                        "on-secondary-fixed-variant": "#004e5c",
+                        "inverse-on-surface": "#2a3043",
+                        "error": "#ffb4ab",
+                        "tertiary-container": "#656d84",
+                        "outline-variant": "#434655",
+                        "error-container": "#93000a",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-fixed-dim": "#bec6e0",
+                        "on-secondary-fixed": "#001f26",
+                        "inverse-surface": "#dce1fb",
+                        "surface-dim": "#0c1324",
+                        "primary-container": "#2563eb",
+                        "primary-fixed": "#dbe1ff",
+                        "inverse-primary": "#0053db",
+                        "surface-container": "#191f31",
+                        "secondary-fixed": "#acedff",
+                        "on-primary": "#002a78",
+                        "tertiary": "#bec6e0",
+                        "on-tertiary": "#283044",
+                        "on-error-container": "#ffdad6",
+                        "on-surface": "#dce1fb",
+                        "secondary": "#4cd7f6",
+                        "on-tertiary-fixed-variant": "#3f465c",
+                        "surface": "#0c1324",
+                        "secondary-container": "#03b5d3",
+                        "on-secondary": "#003640",
+                        "tertiary-fixed": "#dae2fd",
+                        "surface-variant": "#2e3447",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-error": "#690005"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xl": "40px",
+                        "md": "16px",
+                        "container-margin": "32px",
+                        "xs": "4px",
+                        "gutter": "20px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "display-sm": ["Plus Jakarta Sans"],
+                        "body-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "label-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "display-sm": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom styles for specific glowing effects and scrollbars not easily achievable with basic Tailwind utilities */
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+        .glass-panel {
+            background-color: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .input-glow:focus-within {
+            box-shadow: inset 0 0 0 2px rgba(37, 99, 235, 0.5), 0 0 10px rgba(6, 182, 212, 0.2);
+        }
+        .radial-glow-bg {
+            background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.15), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(6, 182, 212, 0.1), transparent 40%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col radial-glow-bg relative overflow-x-hidden">
+<!-- Transactional Screen: Navigation elements suppressed -->
+<!-- Top Action Bar (Back) -->
+<header class="sticky top-0 z-40 w-full px-container-margin py-md flex items-center justify-between bg-background/80 backdrop-blur-md border-b border-white/5">
+<button aria-label="Zurück" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-white/5 active:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-on-surface" style="font-variation-settings: 'wght' 300;">arrow_back</span>
+</button>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Schritt 2 von 3</span>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 px-container-margin py-lg flex flex-col pb-32">
+<!-- Page Title -->
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background mb-lg">Buchungsdetails</h1>
+<!-- Event Summary Card (Glassmorphism) -->
+<div class="glass-panel rounded-xl p-md mb-lg flex gap-md items-center">
+<div class="w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-white/10 relative">
+<img alt="Event Thumbnail" class="w-full h-full object-cover" data-alt="A close-up view of a sleek, minimalist digital calendar interface showing an upcoming meeting. The scene is bathed in dark mode lighting with a subtle cool blue and vibrant cyan (#06b6d4) atmospheric glow. The composition focuses on a specific time slot, rendered in crisp typography against a deep navy background, conveying a sense of precise, automated scheduling in a premium B2B software environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD31jvr8wEdEpVot3Wp-vfqSqLtmG-Vg2J-pFXH458ctn2yXUU9TZRD4Xad4dWpaZMVKwpwBoVdxfdf4KtYym2RH0ccrXwVhcopFN1xpEgJR9qS-n4T5QqKJwAIcNBuruBBuMS93SqPTrS90iV1h3yyaGgYSMB45xf855FsJhu5arwN6MwRtIv99QRCmpfZK-cZdHPXlc71mBr4Ujta2_yusOzDYOfxeIudcjS4mQcGEwpo-en_0iEsfh52vh8dYb8-ZtJO33l8cJtb"/>
+<div class="absolute inset-0 bg-primary-container/20 mix-blend-overlay"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-secondary mb-xs uppercase tracking-wider">Discovery Call</span>
+<span class="font-body-md text-body-md text-on-surface mb-xs flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+                    14. Nov 2024, 10:00 Uhr
+                </span>
+<span class="font-body-md text-body-md text-on-surface-variant flex items-center gap-xs">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                    30 Minuten
+                </span>
+</div>
+</div>
+<!-- Single Column Form -->
+<form class="flex flex-col gap-md">
+<!-- Vorname -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider pl-xs" for="vorname">Vorname <span class="text-error">*</span></label>
+<div class="relative input-glow rounded-lg transition-shadow duration-300">
+<input class="w-full h-14 bg-surface-container border border-outline-variant/30 rounded-lg px-md font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary-container transition-colors" id="vorname" name="vorname" placeholder="Dein Vorname" required="" type="text"/>
+</div>
+</div>
+<!-- Nachname -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider pl-xs" for="nachname">Nachname <span class="text-error">*</span></label>
+<div class="relative input-glow rounded-lg transition-shadow duration-300">
+<input class="w-full h-14 bg-surface-container border border-outline-variant/30 rounded-lg px-md font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary-container transition-colors" id="nachname" name="nachname" placeholder="Dein Nachname" required="" type="text"/>
+</div>
+</div>
+<!-- E-Mail -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider pl-xs" for="email">E-Mail Adresse <span class="text-error">*</span></label>
+<div class="relative input-glow rounded-lg transition-shadow duration-300">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">mail</span>
+<input class="w-full h-14 bg-surface-container border border-outline-variant/30 rounded-lg pl-12 pr-md font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary-container transition-colors" id="email" name="email" placeholder="name@unternehmen.de" required="" type="email"/>
+</div>
+</div>
+<!-- Telefon (Optional) -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider pl-xs" for="telefon">Telefonnummer <span class="text-on-surface-variant/50 lowercase normal-case">(optional)</span></label>
+<div class="relative input-glow rounded-lg transition-shadow duration-300">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">call</span>
+<input class="w-full h-14 bg-surface-container border border-outline-variant/30 rounded-lg pl-12 pr-md font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary-container transition-colors" id="telefon" name="telefon" placeholder="+49 123 456789" type="tel"/>
+</div>
+</div>
+<!-- Notizen -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider pl-xs" for="notizen">Thema / Notizen</label>
+<div class="relative input-glow rounded-lg transition-shadow duration-300">
+<textarea class="w-full bg-surface-container border border-outline-variant/30 rounded-lg p-md font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:border-primary-container transition-colors resize-none" id="notizen" name="notizen" placeholder="Worum soll es in unserem Termin gehen?" rows="4"></textarea>
+</div>
+</div>
+</form>
+</main>
+<!-- Sticky Bottom CTA (Finger-friendly) -->
+<div class="fixed bottom-0 left-0 w-full px-container-margin py-lg bg-gradient-to-t from-background via-background/90 to-transparent z-50">
+<button class="w-full h-14 bg-primary-container text-white font-label-md text-label-md uppercase tracking-widest rounded-xl flex items-center justify-center gap-sm active:scale-[0.98] transition-all duration-200 shadow-[0_4px_20px_rgba(37,99,235,0.4)] hover:shadow-[0_4px_25px_rgba(6,182,212,0.5)] border border-white/10 relative overflow-hidden group">
+<span class="relative z-10">Termin bestätigen</span>
+<span class="material-symbols-outlined relative z-10" style="font-variation-settings: 'wght' 600;">check_circle</span>
+<!-- Subtle hover/active glow effect inside button -->
+<div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+</button>
+</div>
+</body></html>
