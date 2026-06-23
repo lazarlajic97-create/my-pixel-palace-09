@@ -1,13 +1,14 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import { Logo } from "./Logo";
-import { LayoutDashboard, Calendar, Layers, Clock, Plug, Settings, Menu, X, Bell, Search } from "lucide-react";
+import { LayoutDashboard, Calendar, Layers, Clock, Plug, Settings, Menu, X, Bell, Search, BarChart3 } from "lucide-react";
 
 const nav = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/admin/appointments", label: "Termine", icon: Calendar },
   { to: "/admin/event-types", label: "Event Typen", icon: Layers },
   { to: "/admin/availability", label: "Verfügbarkeiten", icon: Clock },
+  { to: "/admin/analytics", label: "Analytics", icon: BarChart3 },
   { to: "/admin/integrations", label: "Integrationen", icon: Plug },
   { to: "/admin/settings", label: "Einstellungen", icon: Settings },
 ];
