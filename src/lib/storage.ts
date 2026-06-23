@@ -24,6 +24,10 @@ export function saveBookings(bookings: Booking[]) {
   localStorage.setItem(KEY_BOOKINGS, JSON.stringify(bookings));
 }
 
+export function findBookingById(id: string): Booking | undefined {
+  return loadBookings().find((b) => b.id === id);
+}
+
 export function upsertBooking(b: Booking) {
   const all = loadBookings();
   const idx = all.findIndex((x) => x.id === b.id);
