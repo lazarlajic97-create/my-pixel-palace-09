@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { RouteTransition } from "../components/RouteTransition";
+
 
 function NotFoundComponent() {
   return (
@@ -91,7 +93,9 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
+      <RouteTransition />
       <Outlet />
     </QueryClientProvider>
   );
 }
+
