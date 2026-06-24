@@ -232,10 +232,10 @@ function Landing() {
           <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-64 w-[600px] rounded-full bg-[rgba(59,130,246,0.25)] blur-3xl" />
           <div className="relative grid md:grid-cols-[1fr_auto] gap-6 items-center">
             <div>
-              <h2 className="text-2xl md:text-4xl font-bold tracking-tight">Bereit für deinen Demo Call?</h2>
-              <p className="mt-3 text-[color:var(--color-text-muted)] text-lg">30 Minuten – unverbindlich. Wir analysieren gemeinsam, wo Automatisierung Sinn macht.</p>
+              <h2 className="text-2xl md:text-4xl font-bold tracking-tight">Bereit, deinen Kalender zu automatisieren?</h2>
+              <p className="mt-3 text-[color:var(--color-text-muted)] text-lg">Richte deine Event Typen ein und lass SoVoice ab sofort jeden Termin für dich buchen.</p>
             </div>
-            <Link to="/book" className="btn-primary pulse-glow whitespace-nowrap">Jetzt Termin buchen <ArrowRight className="h-4 w-4" /></Link>
+            <Link to="/admin" className="btn-primary pulse-glow whitespace-nowrap">Zum Admin Dashboard <ArrowRight className="h-4 w-4" /></Link>
           </div>
         </div>
       </section>
