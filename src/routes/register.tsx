@@ -18,7 +18,7 @@ function RegisterPage() {
     setLoading(true);
     setTimeout(() => {
       try { localStorage.setItem("sovoice_user", JSON.stringify({ email, company })); } catch {}
-      navigate({ to: "/admin" });
+      navigate({ to: "/" });
     }, 600);
   };
 
@@ -82,7 +82,7 @@ function RegisterPage() {
           </button>
 
           <p className="text-[11px] text-center text-[color:var(--color-text-dim)] leading-relaxed">
-            Mit der Registrierung akzeptierst du unsere <a href="#" className="underline hover:text-[color:var(--color-text-muted)]">AGB</a> und die <Link to="/datenschutz" className="underline hover:text-[color:var(--color-text-muted)]">Datenschutzerklärung</Link>.
+            Mit der Registrierung akzeptierst du unsere AGB und die Datenschutzerklärung.
           </p>
         </form>
       </AuthShell>

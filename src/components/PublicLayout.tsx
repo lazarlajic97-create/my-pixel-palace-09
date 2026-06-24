@@ -71,10 +71,8 @@ export function PublicLayout({ children }: { children: ReactNode }) {
             </ul>
           </div>
           <div>
-            <h4 className="text-sm font-semibold mb-3">Rechtliches</h4>
+            <h4 className="text-sm font-semibold mb-3">Mehr</h4>
             <ul className="space-y-2 text-sm text-[color:var(--color-text-muted)]">
-              <li><Link to="/datenschutz" className="hover:text-[color:var(--color-text)]">Datenschutz</Link></li>
-              <li><Link to="/impressum" className="hover:text-[color:var(--color-text)]">Impressum</Link></li>
               <li><a href="https://sovoice.ch" className="hover:text-[color:var(--color-text)]">SoVoice Hauptseite</a></li>
             </ul>
           </div>

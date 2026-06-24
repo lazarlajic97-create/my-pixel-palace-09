@@ -18,7 +18,7 @@ function LoginPage() {
     setLoading(true);
     setTimeout(() => {
       try { localStorage.setItem("sovoice_user", JSON.stringify({ email, remember })); } catch {}
-      navigate({ to: "/admin" });
+      navigate({ to: "/" });
     }, 500);
   };
 
