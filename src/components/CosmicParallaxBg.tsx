@@ -50,7 +50,7 @@ export function CosmicParallaxBg({
       className={`cosmic-wrap relative overflow-hidden ${className}`}
       style={{
         background:
-          "radial-gradient(ellipse at bottom, #0b1a3a 0%, #05070d 70%)",
+          "radial-gradient(ellipse at bottom, var(--cosmic-bg-mid, #0b1a3a) 0%, var(--cosmic-bg-outer, #05070d) 70%)",
       }}
     >
       <div
@@ -87,18 +87,18 @@ export function CosmicParallaxBg({
       />
 
       {/* Horizon glow */}
-      <div className="absolute inset-x-0 bottom-0 h-1/2 pointer-events-none"
+      <div className="cosmic-horizon absolute inset-x-0 bottom-0 h-1/2 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse at 50% 100%, rgba(59,130,246,0.55) 0%, rgba(34,211,238,0.18) 30%, transparent 60%)",
+            "radial-gradient(ellipse at 50% 100%, var(--cosmic-horizon-inner, rgba(59,130,246,0.55)) 0%, var(--cosmic-horizon-mid, rgba(34,211,238,0.18)) 30%, transparent 60%)",
         }}
       />
       {/* Earth curve */}
-      <div className="absolute left-1/2 -translate-x-1/2 bottom-[-60%] w-[180%] aspect-square rounded-full pointer-events-none"
+      <div className="cosmic-earth absolute left-1/2 -translate-x-1/2 bottom-[-60%] w-[180%] aspect-square rounded-full pointer-events-none"
         style={{
           background:
-            "radial-gradient(circle at 50% 0%, #1e3a8a 0%, #0a0f1c 55%, transparent 70%)",
-          boxShadow: "0 -30px 80px -10px rgba(59,130,246,0.45)",
+            "radial-gradient(circle at 50% 0%, var(--cosmic-earth-inner, #1e3a8a) 0%, var(--cosmic-earth-outer, #0a0f1c) 55%, transparent 70%)",
+          boxShadow: "0 -30px 80px -10px var(--cosmic-glow, rgba(59,130,246,0.45))",
         }}
       />
 
@@ -108,10 +108,10 @@ export function CosmicParallaxBg({
           style={{
             fontSize: "clamp(2.5rem, 8vw, 6rem)",
             background:
-              "linear-gradient(180deg, #ffffff 0%, #93c5fd 60%, #22d3ee 100%)",
+              "linear-gradient(180deg, var(--cosmic-head-from, #ffffff) 0%, var(--cosmic-head-mid, #93c5fd) 60%, var(--cosmic-head-to, #22d3ee) 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            textShadow: "0 0 40px rgba(59,130,246,0.4)",
+            textShadow: "0 0 40px var(--cosmic-head-glow, rgba(59,130,246,0.4))",
           }}
         >
           {head.toUpperCase()}
