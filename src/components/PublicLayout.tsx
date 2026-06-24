@@ -6,8 +6,6 @@ import { Menu, X } from "lucide-react";
 
 const nav = [
   { to: "/", label: "Startseite" },
-  { to: "/events", label: "Terminarten" },
-  { to: "/book", label: "Termin buchen" },
 ];
 
 export function PublicLayout({ children }: { children: ReactNode }) {
@@ -26,8 +24,8 @@ export function PublicLayout({ children }: { children: ReactNode }) {
           </nav>
           <div className="hidden md:flex items-center gap-2">
             <ThemeToggle />
-            <Link to="/admin" className="btn-ghost">Admin</Link>
-            <Link to="/book" className="btn-primary">Termin buchen</Link>
+            <Link to="/login" className="btn-ghost">Login</Link>
+            <Link to="/register" className="btn-primary">Registrieren</Link>
           </div>
           <div className="md:hidden flex items-center gap-2">
             <ThemeToggle />
@@ -44,8 +42,8 @@ export function PublicLayout({ children }: { children: ReactNode }) {
                   {n.label}
                 </Link>
               ))}
-              <Link to="/admin" onClick={() => setOpen(false)} className="px-3 py-2.5 rounded-lg text-sm text-[color:var(--color-text-muted)] hover:bg-[rgba(15,34,80,0.05)]">Admin</Link>
-              <Link to="/book" onClick={() => setOpen(false)} className="btn-primary mt-2">Termin buchen</Link>
+              <Link to="/login" onClick={() => setOpen(false)} className="px-3 py-2.5 rounded-lg text-sm text-[color:var(--color-text-muted)] hover:bg-[rgba(15,34,80,0.05)]">Login</Link>
+              <Link to="/register" onClick={() => setOpen(false)} className="btn-primary mt-2">Registrieren</Link>
             </div>
           </div>
         )}
@@ -66,11 +64,10 @@ export function PublicLayout({ children }: { children: ReactNode }) {
             </div>
           </div>
           <div>
-            <h4 className="text-sm font-semibold mb-3">Plattform</h4>
+            <h4 className="text-sm font-semibold mb-3">Konto</h4>
             <ul className="space-y-2 text-sm text-[color:var(--color-text-muted)]">
-              <li><Link to="/events" className="hover:text-[color:var(--color-text)]">Terminarten</Link></li>
-              <li><Link to="/book" className="hover:text-[color:var(--color-text)]">Termin buchen</Link></li>
-              <li><Link to="/admin" className="hover:text-[color:var(--color-text)]">Admin Bereich</Link></li>
+              <li><Link to="/login" className="hover:text-[color:var(--color-text)]">Login</Link></li>
+              <li><Link to="/register" className="hover:text-[color:var(--color-text)]">Registrieren</Link></li>
             </ul>
           </div>
           <div>
