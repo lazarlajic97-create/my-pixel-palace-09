@@ -139,12 +139,20 @@ html.light .text-gradient {
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
-/* Light cosmic hero */
+/* Light cosmic hero – darker top → blue middle → white bottom */
 html.light .cosmic-wrap {
   --cosmic-bg-mid: #bfdbfe;
   --cosmic-bg-outer: #e0f2fe;
   --star-color: #1e3a8a;
   --star-spread: 1px;
+  background: linear-gradient(
+    180deg,
+    #1e3a8a 0%,
+    #3b82f6 22%,
+    #7dd3fc 55%,
+    #dbeafe 80%,
+    #ffffff 100%
+  ) !important;
 }
 /* Note: no `filter: drop-shadow` on .cosmic-stars — it forces per-frame
    rasterization of the huge box-shadow star field and tanks performance. */
@@ -152,20 +160,25 @@ html.light .cosmic-stars,
 html.light .cosmic-stars::after {
   border-radius: 50%;
 }
+/* Stars near the white bottom would be invisible — fade them as they fall */
+html.light .cosmic-stars {
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 90%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 90%);
+}
 html.light .cosmic-horizon {
-  --cosmic-horizon-inner: rgba(37, 99, 235, 0.32);
-  --cosmic-horizon-mid: rgba(14, 165, 233, 0.14);
+  --cosmic-horizon-inner: rgba(255, 255, 255, 0.55);
+  --cosmic-horizon-mid: rgba(186, 230, 253, 0.35);
 }
 html.light .cosmic-earth {
-  --cosmic-earth-inner: #93c5fd;
-  --cosmic-earth-outer: #bfdbfe;
-  --cosmic-glow: rgba(37, 99, 235, 0.24);
+  --cosmic-earth-inner: #ffffff;
+  --cosmic-earth-outer: #e0f2fe;
+  --cosmic-glow: rgba(59, 130, 246, 0.35);
 }
 html.light .cosmic-head {
-  --cosmic-head-from: #0a1020;
-  --cosmic-head-mid: #1d4ed8;
-  --cosmic-head-to: #0ea5e9;
-  --cosmic-head-glow: rgba(37, 99, 235, 0.18);
+  --cosmic-head-from: #ffffff;
+  --cosmic-head-mid: #dbeafe;
+  --cosmic-head-to: #1e3a8a;
+  --cosmic-head-glow: rgba(15, 23, 42, 0.25);
 }
 
 /* Light theme toggle */

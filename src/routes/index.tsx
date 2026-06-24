@@ -22,23 +22,23 @@ function Landing() {
           <div className="mt-10 flex flex-col items-center gap-4">
             <span className="chip backdrop-blur-md">
               <Sparkles className="h-3 w-3 text-[color:var(--color-accent)]" />
-              Powered by SoVoice AI · Vollautomatische Terminvergabe
+              Die Kalender-Erweiterung für SoVoice Kunden
             </span>
             <p className="max-w-2xl text-base md:text-lg text-[color:var(--color-text-muted)]">
-              Die Kalender Plattform für Unternehmen mit SoVoice. Definiere deine Event Typen,
-              Verfügbarkeiten und Regeln – der SoVoice KI Agent telefoniert mit deinen Kunden
-              und trägt jeden Termin mit allen Details automatisch ein.
+              SoVoice ist dein KI Voice Agent, der Anrufe entgegennimmt und Leads qualifiziert.
+              Mit dem SoVoice Kalender werden alle Termine automatisch eingetragen – inklusive
+              Kontaktdaten, Anliegen und Gesprächsnotizen. Eine zentrale Übersicht für dein ganzes Team.
             </p>
             <div className="mt-2 flex flex-wrap justify-center gap-3">
-              <Link to="/admin" className="btn-primary pulse-glow">
-                Admin Dashboard öffnen <ArrowRight className="h-4 w-4" />
+              <Link to="/register" className="btn-primary pulse-glow">
+                Kostenlos starten <ArrowRight className="h-4 w-4" />
               </Link>
-              <Link to="/book" className="btn-secondary">Buchungsansicht ansehen</Link>
+              <Link to="/login" className="btn-secondary">Einloggen</Link>
             </div>
             <div className="mt-3 flex flex-wrap justify-center gap-4 text-xs text-[color:var(--color-text-muted)]">
-              <span className="inline-flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-[color:var(--color-success)]" /> Vollständig konfigurierbar</span>
+              <span className="inline-flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-[color:var(--color-success)]" /> Nahtlos mit SoVoice verbunden</span>
               <span className="inline-flex items-center gap-1.5"><Shield className="h-3.5 w-3.5 text-[color:var(--color-accent)]" /> DSG & DSGVO bewusst</span>
-              <span className="inline-flex items-center gap-1.5"><Star className="h-3.5 w-3.5 text-[color:var(--color-warning)]" /> Für SoVoice Kunden</span>
+              <span className="inline-flex items-center gap-1.5"><Star className="h-3.5 w-3.5 text-[color:var(--color-warning)]" /> Exklusiv für SoVoice Kunden</span>
             </div>
           </div>
         </CosmicParallaxBg>
@@ -232,10 +232,10 @@ function Landing() {
           <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-64 w-[600px] rounded-full bg-[rgba(59,130,246,0.25)] blur-3xl" />
           <div className="relative grid md:grid-cols-[1fr_auto] gap-6 items-center">
             <div>
-              <h2 className="text-2xl md:text-4xl font-bold tracking-tight">Bereit, deinen Kalender zu automatisieren?</h2>
-              <p className="mt-3 text-[color:var(--color-text-muted)] text-lg">Richte deine Event Typen ein und lass SoVoice ab sofort jeden Termin für dich buchen.</p>
+              <h2 className="text-2xl md:text-4xl font-bold tracking-tight">Bereit, deinen SoVoice Kalender zu aktivieren?</h2>
+              <p className="mt-3 text-[color:var(--color-text-muted)] text-lg">Registriere dich in 60 Sekunden und lass die KI ab sofort jeden Termin für dich eintragen.</p>
             </div>
-            <Link to="/admin" className="btn-primary pulse-glow whitespace-nowrap">Zum Admin Dashboard <ArrowRight className="h-4 w-4" /></Link>
+            <Link to="/register" className="btn-primary pulse-glow whitespace-nowrap">Jetzt registrieren <ArrowRight className="h-4 w-4" /></Link>
           </div>
         </div>
       </section>
