@@ -195,6 +195,42 @@ html.light .time-slot { background: rgba(15,34,80,0.04); }
 }
 html.light .industry-card:hover { background: rgba(15,34,80,0.05); }
 
+@utility month-gradient {
+  background: linear-gradient(90deg, #ffffff 0%, #93c5fd 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+html.light .month-gradient {
+  background: linear-gradient(90deg, #0a1020 0%, #2563eb 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+@utility cal-nav-hover {
+  &:hover { background: rgba(255,255,255,0.05); }
+}
+html.light .cal-nav-hover:hover { background: rgba(15,34,80,0.06); }
+
+@utility today-cell {
+  color: #ffffff;
+  border-color: rgba(34,211,238,0.5);
+  background: rgba(34,211,238,0.06);
+  &:hover { background: rgba(34,211,238,0.12); }
+}
+html.light .today-cell {
+  color: var(--color-text);
+  border-color: rgba(37,99,235,0.25);
+  background: rgba(37,99,235,0.08);
+  &:hover { background: rgba(37,99,235,0.12); }
+}
+
+@utility slot-inactive {
+  background: rgba(255,255,255,0.02);
+  &:hover { background: rgba(59,130,246,0.06); }
+}
+html.light .slot-inactive {
+  background: rgba(15,34,80,0.04);
+  &:hover { background: rgba(59,130,246,0.08); }
+}
+
 @utility container-app {
   width: 100%;
   margin-inline: auto;
