@@ -35,9 +35,6 @@ export function PublicLayout({ children }: { children: ReactNode }) {
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
           </div>
-          <button onClick={() => setOpen(!open)} className="md:hidden btn-ghost hidden" aria-label="Menü">
-            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
         </div>
         {open && (
           <div className="md:hidden border-t border-[color:var(--color-border)] bg-[color:var(--color-bg-elev)]">
