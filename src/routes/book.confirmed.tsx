@@ -44,7 +44,7 @@ function Confirmed() {
             <Check className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-3xl md:text-4xl font-bold">Dein Termin ist bestätigt.</h1>
-          <p className="mt-3 text-[color:var(--color-text-muted)]">Wir haben dir die Terminbestätigung an <span className="text-white font-medium">{booking.email}</span> gesendet.</p>
+          <p className="mt-3 text-[color:var(--color-text-muted)]">Wir haben dir die Terminbestätigung an <span className="text-[color:var(--color-text)] font-medium">{booking.email}</span> gesendet.</p>
         </div>
 
         <div className="glass-strong p-6 md:p-8">

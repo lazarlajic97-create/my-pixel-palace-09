@@ -37,8 +37,8 @@ export function AdminLayout({ children, title, subtitle, actions }: { children: 
               onClick={() => setOpen(false)}
               className={`relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition group ${
                 active
-                  ? "text-white"
-                  : "text-[color:var(--color-text-muted)] hover:bg-white/5 hover:text-white"
+                  ? "text-[color:var(--color-text)]"
+                  : "text-[color:var(--color-text-muted)] hover:bg-[rgba(15,34,80,0.05)] hover:text-[color:var(--color-text)]"
               }`}
             >
               {active && (
@@ -47,7 +47,7 @@ export function AdminLayout({ children, title, subtitle, actions }: { children: 
                   <span className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-0.5 rounded-r bg-gradient-to-b from-[#60a5fa] to-[#22d3ee]" />
                 </>
               )}
-              <Icon className={`relative h-4 w-4 shrink-0 ${active ? "text-[#60a5fa]" : ""}`} />
+              <Icon className={`relative h-4 w-4 shrink-0 ${active ? "text-[#2563eb]" : ""}`} />
               <span className="relative">{n.label}</span>
             </Link>
           );
@@ -66,7 +66,7 @@ export function AdminLayout({ children, title, subtitle, actions }: { children: 
             </div>
           </div>
         </div>
-        <Link to="/" className="mt-2 block text-center text-xs text-[color:var(--color-text-dim)] hover:text-white">← Zur öffentlichen Seite</Link>
+        <Link to="/" className="mt-2 block text-center text-xs text-[color:var(--color-text-dim)] hover:text-[color:var(--color-text)]">← Zur öffentlichen Seite</Link>
       </div>
     </div>
   );
@@ -100,10 +100,10 @@ export function AdminLayout({ children, title, subtitle, actions }: { children: 
               {subtitle && <p className="text-xs text-[color:var(--color-text-muted)] truncate hidden md:block">{subtitle}</p>}
             </div>
             <div className="flex items-center gap-2 shrink-0">
-              <div className="hidden md:flex items-center gap-2 px-3 h-9 rounded-lg bg-white/[0.03] border border-[color:var(--color-border-strong)] text-xs text-[color:var(--color-text-dim)] w-56 focus-within:border-[rgba(59,130,246,0.5)] transition">
+              <div className="hidden md:flex items-center gap-2 px-3 h-9 rounded-lg bg-[rgba(15,34,80,0.04)] border border-[color:var(--color-border-strong)] text-xs text-[color:var(--color-text-dim)] w-56 focus-within:border-[rgba(59,130,246,0.5)] transition">
                 <Search className="h-3.5 w-3.5" />
                 <input placeholder="Suchen ..." className="bg-transparent outline-none w-full placeholder:text-[color:var(--color-text-dim)] text-[color:var(--color-text)]" />
-                <kbd className="hidden lg:inline-flex text-[10px] px-1.5 py-0.5 rounded bg-white/5 border border-[color:var(--color-border-strong)]">⌘K</kbd>
+                <kbd className="hidden lg:inline-flex text-[10px] px-1.5 py-0.5 rounded bg-[rgba(15,34,80,0.06)] border border-[color:var(--color-border-strong)]">⌘K</kbd>
               </div>
               <ThemeToggle />
               <button className="btn-ghost relative" aria-label="Benachrichtigungen">

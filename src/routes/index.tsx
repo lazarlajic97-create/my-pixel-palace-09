@@ -64,9 +64,9 @@ function Landing() {
                   const wknd = i % 7 >= 5;
                   const sel = day === 18;
                   return (
-                    <div key={i} className={`aspect-square grid place-items-center rounded text-[10px] transition ${
+                    <div key={i} className={`aspect-square grid place-items-center rounded text-[10px] transition date-cell ${
                       sel ? "bg-gradient-to-br from-[#3b82f6] to-[#1e40af] text-white shadow-[0_0_14px_-2px_rgba(59,130,246,0.7)] font-semibold scale-105" :
-                      !valid || wknd ? "text-[color:var(--color-text-dim)] opacity-30" : "text-[color:var(--color-text)] hover:bg-white/5"
+                      !valid || wknd ? "text-[color:var(--color-text-dim)] opacity-30" : "text-[color:var(--color-text)]"
                     }`}>{valid ? day : ""}</div>
                   );
                 })}
@@ -74,7 +74,7 @@ function Landing() {
               <div className="text-[11px] font-medium text-[color:var(--color-text-muted)] mb-1.5">Verfügbare Zeiten · Do, 18. Juni</div>
               <div className="grid grid-cols-4 gap-1.5">
                 {["09:00","10:30","14:00","16:30"].map((t,i) => (
-                  <div key={t} className={`px-1 py-1.5 rounded-md text-[11px] text-center font-medium border ${i===1 ? "bg-gradient-to-br from-[#3b82f6] to-[#1e40af] text-white border-[#60a5fa] shadow-[0_6px_18px_-8px_rgba(59,130,246,0.6)]" : "border-[color:var(--color-border-strong)] bg-white/[0.02]"}`}>{t}</div>
+                  <div key={t} className={`px-1 py-1.5 rounded-md text-[11px] text-center font-medium border ${i===1 ? "bg-gradient-to-br from-[#3b82f6] to-[#1e40af] text-white border-[#60a5fa] shadow-[0_6px_18px_-8px_rgba(59,130,246,0.6)]" : "border-[color:var(--color-border-strong)] time-slot"}`}>{t}</div>
                 ))}
               </div>
             </div>
@@ -104,7 +104,7 @@ function Landing() {
                 ].map(({v,l,i:Icon}) => (
                   <div key={l} className="glass p-3">
                     <Icon className="h-3.5 w-3.5 text-[color:var(--color-accent)] mb-1.5" />
-                    <div className="text-lg font-bold bg-gradient-to-r from-white to-[#93c5fd] bg-clip-text text-transparent leading-none">{v}</div>
+                    <div className="text-lg font-bold stat-value-gradient leading-none">{v}</div>
                     <div className="text-[10px] text-[color:var(--color-text-muted)] mt-1">{l}</div>
                   </div>
                 ))}
@@ -217,7 +217,7 @@ function Landing() {
             {icon:Scale,name:"Kanzleien"},{icon:ShieldCheck,name:"Versicherungsbroker"},{icon:GraduationCap,name:"Bildungsanbieter"},
             {icon:Building2,name:"Handwerksbetriebe"},{icon:HomeIcon,name:"Dienstleister"},
           ].map(({icon:Icon,name}) => (
-            <div key={name} className="glass p-4 flex items-center gap-3 hover:border-[rgba(59,130,246,0.4)] hover:bg-white/[0.04] transition">
+            <div key={name} className="glass p-4 flex items-center gap-3 hover:border-[rgba(59,130,246,0.4)] industry-card transition">
               <div className="h-9 w-9 shrink-0 rounded-lg bg-gradient-to-br from-[rgba(37,99,235,0.25)] to-[rgba(34,211,238,0.15)] grid place-items-center"><Icon className="h-4 w-4 text-[#60a5fa]" /></div>
               <span className="text-sm font-medium truncate">{name}</span>
             </div>

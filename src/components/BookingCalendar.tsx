@@ -49,13 +49,13 @@ export function BookingCalendar({
       <div className="flex items-center justify-between mb-4">
         <div>
           <div className="text-base font-semibold tracking-tight">
-            <span className="bg-gradient-to-r from-white to-[#93c5fd] bg-clip-text text-transparent">{MONTHS[month]}</span> {year}
+            <span className="month-gradient">{MONTHS[month]}</span> {year}
           </div>
           <div className="text-[11px] text-[color:var(--color-text-dim)] mt-0.5">Zeitzone: {availability.timezone}</div>
         </div>
         <div className="flex items-center gap-1">
-          <button onClick={() => setView(new Date(year, month - 1, 1))} aria-label="Vorheriger Monat" className="h-9 w-9 grid place-items-center rounded-lg border border-[color:var(--color-border-strong)] hover:bg-white/5 hover:border-[rgba(59,130,246,0.4)] transition"><ChevronLeft className="h-4 w-4" /></button>
-          <button onClick={() => setView(new Date(year, month + 1, 1))} aria-label="Nächster Monat" className="h-9 w-9 grid place-items-center rounded-lg border border-[color:var(--color-border-strong)] hover:bg-white/5 hover:border-[rgba(59,130,246,0.4)] transition"><ChevronRight className="h-4 w-4" /></button>
+          <button onClick={() => setView(new Date(year, month - 1, 1))} aria-label="Vorheriger Monat" className="cal-nav-hover h-9 w-9 grid place-items-center rounded-lg border border-[color:var(--color-border-strong)] hover:border-[rgba(59,130,246,0.4)] transition"><ChevronLeft className="h-4 w-4" /></button>
+          <button onClick={() => setView(new Date(year, month + 1, 1))} aria-label="Nächster Monat" className="cal-nav-hover h-9 w-9 grid place-items-center rounded-lg border border-[color:var(--color-border-strong)] hover:border-[rgba(59,130,246,0.4)] transition"><ChevronRight className="h-4 w-4" /></button>
         </div>
       </div>
 
@@ -80,8 +80,8 @@ export function BookingCalendar({
                   : disabled
                   ? "text-[color:var(--color-text-dim)] opacity-30 cursor-not-allowed"
                   : isToday
-                  ? "text-white border border-[rgba(34,211,238,0.5)] bg-[rgba(34,211,238,0.06)] hover:bg-[rgba(34,211,238,0.12)]"
-                  : "text-[color:var(--color-text)] hover:bg-white/5 border border-transparent hover:border-[color:var(--color-border-strong)]"
+                  ? "today-cell"
+                  : "text-[color:var(--color-text)] cal-nav-hover border border-transparent hover:border-[color:var(--color-border-strong)]"
               }`}
             >
               {d.getDate()}
@@ -113,7 +113,7 @@ export function TimeSlots({ value, onChange, slots }: { value: string | null; on
             className={`px-3 py-2.5 rounded-lg text-sm font-medium transition border ${
               selected
                 ? "bg-gradient-to-br from-[#3b82f6] to-[#1e40af] text-white border-[#60a5fa] shadow-[0_0_20px_-4px_rgba(59,130,246,0.7)]"
-                : "bg-white/[0.02] border-[color:var(--color-border-strong)] text-[color:var(--color-text)] hover:border-[rgba(59,130,246,0.5)] hover:bg-[rgba(59,130,246,0.06)]"
+                : "slot-inactive border-[color:var(--color-border-strong)] text-[color:var(--color-text)] hover:border-[rgba(59,130,246,0.5)]"
             }`}
           >
             {t}

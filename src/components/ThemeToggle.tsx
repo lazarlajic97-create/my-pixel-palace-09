@@ -29,7 +29,7 @@ export function ThemeToggle({ className = "" }: { className?: string }) {
       onClick={toggle}
       aria-label={isDark ? "Light Mode aktivieren" : "Dark Mode aktivieren"}
       title={isDark ? "Light Mode" : "Dark Mode"}
-      className={`relative inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[color:var(--color-border-strong)] bg-white/[0.04] hover:bg-white/[0.08] transition ${className}`}
+      className={`theme-toggle relative inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[color:var(--color-border-strong)] bg-white/[0.04] hover:bg-white/[0.08] transition ${className}`}
     >
       <Sun className={`h-4 w-4 transition-all ${isDark ? "opacity-0 -rotate-90 scale-50" : "opacity-100 rotate-0 scale-100"} absolute`} />
       <Moon className={`h-4 w-4 transition-all ${isDark ? "opacity-100 rotate-0 scale-100" : "opacity-0 rotate-90 scale-50"} absolute`} />

@@ -19,7 +19,7 @@ export function PublicLayout({ children }: { children: ReactNode }) {
           <Logo />
           <nav className="hidden md:flex items-center gap-1">
             {nav.map((n) => (
-              <Link key={n.to} to={n.to} className="px-3 py-2 text-sm text-[color:var(--color-text-muted)] hover:text-white transition" activeProps={{ className: "px-3 py-2 text-sm text-white" }}>
+              <Link key={n.to} to={n.to} className="px-3 py-2 text-sm text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)] transition" activeProps={{ className: "px-3 py-2 text-sm text-[color:var(--color-text)]" }}>
                 {n.label}
               </Link>
             ))}
@@ -40,11 +40,11 @@ export function PublicLayout({ children }: { children: ReactNode }) {
           <div className="md:hidden border-t border-[color:var(--color-border)] bg-[color:var(--color-bg-elev)]">
             <div className="container-app py-3 flex flex-col gap-1">
               {nav.map((n) => (
-                <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="px-3 py-2.5 rounded-lg text-sm text-[color:var(--color-text-muted)] hover:bg-white/5">
+                <Link key={n.to} to={n.to} onClick={() => setOpen(false)} className="px-3 py-2.5 rounded-lg text-sm text-[color:var(--color-text-muted)] hover:bg-[rgba(15,34,80,0.05)]">
                   {n.label}
                 </Link>
               ))}
-              <Link to="/admin" onClick={() => setOpen(false)} className="px-3 py-2.5 rounded-lg text-sm text-[color:var(--color-text-muted)] hover:bg-white/5">Admin</Link>
+              <Link to="/admin" onClick={() => setOpen(false)} className="px-3 py-2.5 rounded-lg text-sm text-[color:var(--color-text-muted)] hover:bg-[rgba(15,34,80,0.05)]">Admin</Link>
               <Link to="/book" onClick={() => setOpen(false)} className="btn-primary mt-2">Termin buchen</Link>
             </div>
           </div>
@@ -68,17 +68,17 @@ export function PublicLayout({ children }: { children: ReactNode }) {
           <div>
             <h4 className="text-sm font-semibold mb-3">Plattform</h4>
             <ul className="space-y-2 text-sm text-[color:var(--color-text-muted)]">
-              <li><Link to="/events" className="hover:text-white">Terminarten</Link></li>
-              <li><Link to="/book" className="hover:text-white">Termin buchen</Link></li>
-              <li><Link to="/admin" className="hover:text-white">Admin Bereich</Link></li>
+              <li><Link to="/events" className="hover:text-[color:var(--color-text)]">Terminarten</Link></li>
+              <li><Link to="/book" className="hover:text-[color:var(--color-text)]">Termin buchen</Link></li>
+              <li><Link to="/admin" className="hover:text-[color:var(--color-text)]">Admin Bereich</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="text-sm font-semibold mb-3">Rechtliches</h4>
             <ul className="space-y-2 text-sm text-[color:var(--color-text-muted)]">
-              <li><Link to="/datenschutz" className="hover:text-white">Datenschutz</Link></li>
-              <li><Link to="/impressum" className="hover:text-white">Impressum</Link></li>
-              <li><a href="https://sovoice.ch" className="hover:text-white">SoVoice Hauptseite</a></li>
+              <li><Link to="/datenschutz" className="hover:text-[color:var(--color-text)]">Datenschutz</Link></li>
+              <li><Link to="/impressum" className="hover:text-[color:var(--color-text)]">Impressum</Link></li>
+              <li><a href="https://sovoice.ch" className="hover:text-[color:var(--color-text)]">SoVoice Hauptseite</a></li>
             </ul>
           </div>
         </div>
