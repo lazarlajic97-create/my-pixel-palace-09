@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as RescheduleRouteImport } from './routes/reschedule'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as DatenschutzRouteImport } from './routes/datenschutz'
@@ -28,6 +30,16 @@ import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 const RescheduleRoute = RescheduleRouteImport.update({
   id: '/reschedule',
   path: '/reschedule',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ImpressumRoute = ImpressumRouteImport.update({
@@ -108,6 +120,8 @@ export interface FileRoutesByFullPath {
   '/datenschutz': typeof DatenschutzRoute
   '/events': typeof EventsRoute
   '/impressum': typeof ImpressumRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
   '/reschedule': typeof RescheduleRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/appointments': typeof AdminAppointmentsRoute
@@ -125,6 +139,8 @@ export interface FileRoutesByTo {
   '/datenschutz': typeof DatenschutzRoute
   '/events': typeof EventsRoute
   '/impressum': typeof ImpressumRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
   '/reschedule': typeof RescheduleRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/appointments': typeof AdminAppointmentsRoute
@@ -143,6 +159,8 @@ export interface FileRoutesById {
   '/datenschutz': typeof DatenschutzRoute
   '/events': typeof EventsRoute
   '/impressum': typeof ImpressumRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
   '/reschedule': typeof RescheduleRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
   '/admin/appointments': typeof AdminAppointmentsRoute
@@ -162,6 +180,8 @@ export interface FileRouteTypes {
     | '/datenschutz'
     | '/events'
     | '/impressum'
+    | '/login'
+    | '/register'
     | '/reschedule'
     | '/admin/analytics'
     | '/admin/appointments'
@@ -179,6 +199,8 @@ export interface FileRouteTypes {
     | '/datenschutz'
     | '/events'
     | '/impressum'
+    | '/login'
+    | '/register'
     | '/reschedule'
     | '/admin/analytics'
     | '/admin/appointments'
@@ -196,6 +218,8 @@ export interface FileRouteTypes {
     | '/datenschutz'
     | '/events'
     | '/impressum'
+    | '/login'
+    | '/register'
     | '/reschedule'
     | '/admin/analytics'
     | '/admin/appointments'
@@ -214,6 +238,8 @@ export interface RootRouteChildren {
   DatenschutzRoute: typeof DatenschutzRoute
   EventsRoute: typeof EventsRoute
   ImpressumRoute: typeof ImpressumRoute
+  LoginRoute: typeof LoginRoute
+  RegisterRoute: typeof RegisterRoute
   RescheduleRoute: typeof RescheduleRoute
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
   AdminAppointmentsRoute: typeof AdminAppointmentsRoute
@@ -231,6 +257,20 @@ declare module '@tanstack/react-router' {
       path: '/reschedule'
       fullPath: '/reschedule'
       preLoaderRoute: typeof RescheduleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/impressum': {
@@ -351,6 +391,8 @@ const rootRouteChildren: RootRouteChildren = {
   DatenschutzRoute: DatenschutzRoute,
   EventsRoute: EventsRoute,
   ImpressumRoute: ImpressumRoute,
+  LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRoute,
   RescheduleRoute: RescheduleRoute,
   AdminAnalyticsRoute: AdminAnalyticsRoute,
   AdminAppointmentsRoute: AdminAppointmentsRoute,
