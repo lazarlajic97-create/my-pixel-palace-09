@@ -9,29 +9,10 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as RescheduleRouteImport } from './routes/reschedule'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as ImpressumRouteImport } from './routes/impressum'
-import { Route as EventsRouteImport } from './routes/events'
-import { Route as DatenschutzRouteImport } from './routes/datenschutz'
-import { Route as CancelRouteImport } from './routes/cancel'
-import { Route as BookRouteImport } from './routes/book'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as BookConfirmedRouteImport } from './routes/book.confirmed'
-import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
-import { Route as AdminIntegrationsRouteImport } from './routes/admin.integrations'
-import { Route as AdminEventTypesRouteImport } from './routes/admin.event-types'
-import { Route as AdminAvailabilityRouteImport } from './routes/admin.availability'
-import { Route as AdminAppointmentsRouteImport } from './routes/admin.appointments'
-import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 
-const RescheduleRoute = RescheduleRouteImport.update({
-  id: '/reschedule',
-  path: '/reschedule',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const RegisterRoute = RegisterRouteImport.update({
   id: '/register',
   path: '/register',
@@ -42,223 +23,44 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ImpressumRoute = ImpressumRouteImport.update({
-  id: '/impressum',
-  path: '/impressum',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EventsRoute = EventsRouteImport.update({
-  id: '/events',
-  path: '/events',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DatenschutzRoute = DatenschutzRouteImport.update({
-  id: '/datenschutz',
-  path: '/datenschutz',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CancelRoute = CancelRouteImport.update({
-  id: '/cancel',
-  path: '/cancel',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BookRoute = BookRouteImport.update({
-  id: '/book',
-  path: '/book',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminIndexRoute = AdminIndexRouteImport.update({
-  id: '/admin/',
-  path: '/admin/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BookConfirmedRoute = BookConfirmedRouteImport.update({
-  id: '/confirmed',
-  path: '/confirmed',
-  getParentRoute: () => BookRoute,
-} as any)
-const AdminSettingsRoute = AdminSettingsRouteImport.update({
-  id: '/admin/settings',
-  path: '/admin/settings',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminIntegrationsRoute = AdminIntegrationsRouteImport.update({
-  id: '/admin/integrations',
-  path: '/admin/integrations',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminEventTypesRoute = AdminEventTypesRouteImport.update({
-  id: '/admin/event-types',
-  path: '/admin/event-types',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminAvailabilityRoute = AdminAvailabilityRouteImport.update({
-  id: '/admin/availability',
-  path: '/admin/availability',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminAppointmentsRoute = AdminAppointmentsRouteImport.update({
-  id: '/admin/appointments',
-  path: '/admin/appointments',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
-  id: '/admin/analytics',
-  path: '/admin/analytics',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/book': typeof BookRouteWithChildren
-  '/cancel': typeof CancelRoute
-  '/datenschutz': typeof DatenschutzRoute
-  '/events': typeof EventsRoute
-  '/impressum': typeof ImpressumRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
-  '/reschedule': typeof RescheduleRoute
-  '/admin/analytics': typeof AdminAnalyticsRoute
-  '/admin/appointments': typeof AdminAppointmentsRoute
-  '/admin/availability': typeof AdminAvailabilityRoute
-  '/admin/event-types': typeof AdminEventTypesRoute
-  '/admin/integrations': typeof AdminIntegrationsRoute
-  '/admin/settings': typeof AdminSettingsRoute
-  '/book/confirmed': typeof BookConfirmedRoute
-  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/book': typeof BookRouteWithChildren
-  '/cancel': typeof CancelRoute
-  '/datenschutz': typeof DatenschutzRoute
-  '/events': typeof EventsRoute
-  '/impressum': typeof ImpressumRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
-  '/reschedule': typeof RescheduleRoute
-  '/admin/analytics': typeof AdminAnalyticsRoute
-  '/admin/appointments': typeof AdminAppointmentsRoute
-  '/admin/availability': typeof AdminAvailabilityRoute
-  '/admin/event-types': typeof AdminEventTypesRoute
-  '/admin/integrations': typeof AdminIntegrationsRoute
-  '/admin/settings': typeof AdminSettingsRoute
-  '/book/confirmed': typeof BookConfirmedRoute
-  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/book': typeof BookRouteWithChildren
-  '/cancel': typeof CancelRoute
-  '/datenschutz': typeof DatenschutzRoute
-  '/events': typeof EventsRoute
-  '/impressum': typeof ImpressumRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
-  '/reschedule': typeof RescheduleRoute
-  '/admin/analytics': typeof AdminAnalyticsRoute
-  '/admin/appointments': typeof AdminAppointmentsRoute
-  '/admin/availability': typeof AdminAvailabilityRoute
-  '/admin/event-types': typeof AdminEventTypesRoute
-  '/admin/integrations': typeof AdminIntegrationsRoute
-  '/admin/settings': typeof AdminSettingsRoute
-  '/book/confirmed': typeof BookConfirmedRoute
-  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/book'
-    | '/cancel'
-    | '/datenschutz'
-    | '/events'
-    | '/impressum'
-    | '/login'
-    | '/register'
-    | '/reschedule'
-    | '/admin/analytics'
-    | '/admin/appointments'
-    | '/admin/availability'
-    | '/admin/event-types'
-    | '/admin/integrations'
-    | '/admin/settings'
-    | '/book/confirmed'
-    | '/admin/'
+  fullPaths: '/' | '/login' | '/register'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/book'
-    | '/cancel'
-    | '/datenschutz'
-    | '/events'
-    | '/impressum'
-    | '/login'
-    | '/register'
-    | '/reschedule'
-    | '/admin/analytics'
-    | '/admin/appointments'
-    | '/admin/availability'
-    | '/admin/event-types'
-    | '/admin/integrations'
-    | '/admin/settings'
-    | '/book/confirmed'
-    | '/admin'
-  id:
-    | '__root__'
-    | '/'
-    | '/book'
-    | '/cancel'
-    | '/datenschutz'
-    | '/events'
-    | '/impressum'
-    | '/login'
-    | '/register'
-    | '/reschedule'
-    | '/admin/analytics'
-    | '/admin/appointments'
-    | '/admin/availability'
-    | '/admin/event-types'
-    | '/admin/integrations'
-    | '/admin/settings'
-    | '/book/confirmed'
-    | '/admin/'
+  to: '/' | '/login' | '/register'
+  id: '__root__' | '/' | '/login' | '/register'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  BookRoute: typeof BookRouteWithChildren
-  CancelRoute: typeof CancelRoute
-  DatenschutzRoute: typeof DatenschutzRoute
-  EventsRoute: typeof EventsRoute
-  ImpressumRoute: typeof ImpressumRoute
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
-  RescheduleRoute: typeof RescheduleRoute
-  AdminAnalyticsRoute: typeof AdminAnalyticsRoute
-  AdminAppointmentsRoute: typeof AdminAppointmentsRoute
-  AdminAvailabilityRoute: typeof AdminAvailabilityRoute
-  AdminEventTypesRoute: typeof AdminEventTypesRoute
-  AdminIntegrationsRoute: typeof AdminIntegrationsRoute
-  AdminSettingsRoute: typeof AdminSettingsRoute
-  AdminIndexRoute: typeof AdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/reschedule': {
-      id: '/reschedule'
-      path: '/reschedule'
-      fullPath: '/reschedule'
-      preLoaderRoute: typeof RescheduleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/register': {
       id: '/register'
       path: '/register'
@@ -273,41 +75,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/impressum': {
-      id: '/impressum'
-      path: '/impressum'
-      fullPath: '/impressum'
-      preLoaderRoute: typeof ImpressumRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/events': {
-      id: '/events'
-      path: '/events'
-      fullPath: '/events'
-      preLoaderRoute: typeof EventsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/datenschutz': {
-      id: '/datenschutz'
-      path: '/datenschutz'
-      fullPath: '/datenschutz'
-      preLoaderRoute: typeof DatenschutzRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/cancel': {
-      id: '/cancel'
-      path: '/cancel'
-      fullPath: '/cancel'
-      preLoaderRoute: typeof CancelRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/book': {
-      id: '/book'
-      path: '/book'
-      fullPath: '/book'
-      preLoaderRoute: typeof BookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -315,92 +82,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/': {
-      id: '/admin/'
-      path: '/admin'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/book/confirmed': {
-      id: '/book/confirmed'
-      path: '/confirmed'
-      fullPath: '/book/confirmed'
-      preLoaderRoute: typeof BookConfirmedRouteImport
-      parentRoute: typeof BookRoute
-    }
-    '/admin/settings': {
-      id: '/admin/settings'
-      path: '/admin/settings'
-      fullPath: '/admin/settings'
-      preLoaderRoute: typeof AdminSettingsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/integrations': {
-      id: '/admin/integrations'
-      path: '/admin/integrations'
-      fullPath: '/admin/integrations'
-      preLoaderRoute: typeof AdminIntegrationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/event-types': {
-      id: '/admin/event-types'
-      path: '/admin/event-types'
-      fullPath: '/admin/event-types'
-      preLoaderRoute: typeof AdminEventTypesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/availability': {
-      id: '/admin/availability'
-      path: '/admin/availability'
-      fullPath: '/admin/availability'
-      preLoaderRoute: typeof AdminAvailabilityRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/appointments': {
-      id: '/admin/appointments'
-      path: '/admin/appointments'
-      fullPath: '/admin/appointments'
-      preLoaderRoute: typeof AdminAppointmentsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin/analytics': {
-      id: '/admin/analytics'
-      path: '/admin/analytics'
-      fullPath: '/admin/analytics'
-      preLoaderRoute: typeof AdminAnalyticsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
-interface BookRouteChildren {
-  BookConfirmedRoute: typeof BookConfirmedRoute
-}
-
-const BookRouteChildren: BookRouteChildren = {
-  BookConfirmedRoute: BookConfirmedRoute,
-}
-
-const BookRouteWithChildren = BookRoute._addFileChildren(BookRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  BookRoute: BookRouteWithChildren,
-  CancelRoute: CancelRoute,
-  DatenschutzRoute: DatenschutzRoute,
-  EventsRoute: EventsRoute,
-  ImpressumRoute: ImpressumRoute,
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
-  RescheduleRoute: RescheduleRoute,
-  AdminAnalyticsRoute: AdminAnalyticsRoute,
-  AdminAppointmentsRoute: AdminAppointmentsRoute,
-  AdminAvailabilityRoute: AdminAvailabilityRoute,
-  AdminEventTypesRoute: AdminEventTypesRoute,
-  AdminIntegrationsRoute: AdminIntegrationsRoute,
-  AdminSettingsRoute: AdminSettingsRoute,
-  AdminIndexRoute: AdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
