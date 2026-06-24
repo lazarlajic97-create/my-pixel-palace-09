@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Calendar, ShieldCheck, Sparkles, Zap } from "lucide-react";
+import { AuroraBackground } from "@/components/AuroraBackground";
 
 interface AuthShellProps {
   eyebrow: string;
@@ -12,12 +13,14 @@ interface AuthShellProps {
 export function AuthShell({ eyebrow, title, subtitle, children, footer }: AuthShellProps) {
   return (
     <section className="relative min-h-[calc(100vh-160px)] w-full flex items-center justify-center px-4 py-12 overflow-hidden">
-      {/* Ambient cosmic glows */}
+      {/* Aurora animated background */}
+      <AuroraBackground />
+      {/* Subtle ambient lift over aurora for contrast */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-[15%] -left-[10%] h-[45%] w-[45%] rounded-full blur-[120px] bg-[rgba(59,130,246,0.22)]" />
-        <div className="absolute -bottom-[15%] -right-[10%] h-[45%] w-[45%] rounded-full blur-[120px] bg-[rgba(34,211,238,0.18)]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[420px] w-[420px] rounded-full blur-[100px] bg-[rgba(96,165,250,0.10)]" />
+        <div className="absolute -top-[15%] -left-[10%] h-[40%] w-[40%] rounded-full blur-[120px] bg-[rgba(59,130,246,0.15)]" />
+        <div className="absolute -bottom-[15%] -right-[10%] h-[40%] w-[40%] rounded-full blur-[120px] bg-[rgba(34,211,238,0.12)]" />
       </div>
+
 
       <div className="relative w-full max-w-md">
         {/* Card */}
