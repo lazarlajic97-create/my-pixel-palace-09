@@ -160,10 +160,6 @@ html.light .cosmic-stars,
 html.light .cosmic-stars::after {
   border-radius: 50%;
 }
-html.light .cosmic-stars {
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 82%, transparent 98%);
-          mask-image: linear-gradient(180deg, #000 0%, #000 82%, transparent 98%);
-}
 html.light .cosmic-horizon {
   --cosmic-horizon-inner: rgba(59, 130, 246, 0.55);
   --cosmic-horizon-mid: rgba(34, 211, 238, 0.18);
