@@ -141,18 +141,21 @@ html.light .text-gradient {
 
 /* Light cosmic hero */
 html.light .cosmic-wrap {
-  --cosmic-bg-mid: #dbeafe;
-  --cosmic-bg-outer: #f1f6ff;
-  --star-color: #60a5fa;
+  --cosmic-bg-mid: #bfdbfe;
+  --cosmic-bg-outer: #e0f2fe;
+  --star-color: #172554;
+}
+html.light .cosmic-stars {
+  filter: drop-shadow(0 0 2px rgba(23, 37, 84, 0.55));
 }
 html.light .cosmic-horizon {
-  --cosmic-horizon-inner: rgba(59, 130, 246, 0.28);
-  --cosmic-horizon-mid: rgba(14, 165, 233, 0.12);
+  --cosmic-horizon-inner: rgba(37, 99, 235, 0.32);
+  --cosmic-horizon-mid: rgba(14, 165, 233, 0.14);
 }
 html.light .cosmic-earth {
-  --cosmic-earth-inner: #bfdbfe;
-  --cosmic-earth-outer: #dbeafe;
-  --cosmic-glow: rgba(59, 130, 246, 0.18);
+  --cosmic-earth-inner: #93c5fd;
+  --cosmic-earth-outer: #bfdbfe;
+  --cosmic-glow: rgba(37, 99, 235, 0.24);
 }
 html.light .cosmic-head {
   --cosmic-head-from: #0a1020;
