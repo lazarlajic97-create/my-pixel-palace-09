@@ -93,17 +93,18 @@ html.light body {
 }
 
 html.light .glass {
-  background: linear-gradient(180deg, rgba(255,255,255,0.97), rgba(245,250,255,0.88));
-  backdrop-filter: blur(14px) saturate(140%);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 10px 32px -18px rgba(15,34,80,0.18);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: none;
+  border-color: rgba(15, 34, 80, 0.10);
+  box-shadow: 0 20px 50px -20px rgba(15, 34, 80, 0.18), 0 1px 0 rgba(255,255,255,1) inset;
 }
 html.light .glass-strong {
-  background:
-    radial-gradient(120% 100% at 0% 0%, rgba(59,130,246,0.08), transparent 50%),
-    linear-gradient(180deg, rgba(255,255,255,0.98), rgba(241,246,255,0.92));
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: none;
+  border-color: rgba(15, 34, 80, 0.12);
   box-shadow:
-    0 30px 70px -30px rgba(15,34,80,0.18),
-    0 1px 0 rgba(255,255,255,0.9) inset;
+    0 30px 70px -30px rgba(15, 34, 80, 0.22),
+    0 1px 0 rgba(255,255,255,1) inset;
 }
 html.light .btn-secondary {
   background: #ffffff;
@@ -139,28 +140,26 @@ html.light .text-gradient {
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
-/* Light cosmic hero – darker top → blue middle → white bottom */
+/* Light cosmic hero – dark navy top → blue middle → white bottom */
 html.light .cosmic-wrap {
   --cosmic-bg-mid: #bfdbfe;
   --cosmic-bg-outer: #e0f2fe;
-  --star-color: #1e3a8a;
+  --star-color: #93c5fd;
   --star-spread: 1px;
   background: linear-gradient(
     180deg,
-    #1e3a8a 0%,
-    #3b82f6 22%,
-    #7dd3fc 55%,
-    #dbeafe 80%,
+    #0a1020 0%,
+    #0f1d40 18%,
+    #1e3a8a 38%,
+    #3b82f6 58%,
+    #93c5fd 78%,
     #ffffff 100%
   ) !important;
 }
-/* Note: no `filter: drop-shadow` on .cosmic-stars — it forces per-frame
-   rasterization of the huge box-shadow star field and tanks performance. */
 html.light .cosmic-stars,
 html.light .cosmic-stars::after {
   border-radius: 50%;
 }
-/* Stars near the white bottom would be invisible — fade them as they fall */
 html.light .cosmic-stars {
   -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 90%);
           mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 90%);
@@ -176,9 +175,32 @@ html.light .cosmic-earth {
 }
 html.light .cosmic-head {
   --cosmic-head-from: #ffffff;
-  --cosmic-head-mid: #dbeafe;
-  --cosmic-head-to: #1e3a8a;
-  --cosmic-head-glow: rgba(15, 23, 42, 0.25);
+  --cosmic-head-mid: #bfdbfe;
+  --cosmic-head-to: #22d3ee;
+  --cosmic-head-glow: rgba(15, 23, 42, 0.35);
+}
+/* Hero content in light mode sits on the dark top → force light, readable text */
+html.light .cosmic-wrap .chip,
+html.light .cosmic-wrap p,
+html.light .cosmic-wrap .btn-secondary,
+html.light .cosmic-wrap .btn-ghost {
+  color: rgba(255, 255, 255, 0.9);
+}
+html.light .cosmic-wrap .chip {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+html.light .cosmic-wrap .btn-secondary {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+html.light .cosmic-wrap .btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.20);
+  border-color: rgba(255, 255, 255, 0.32);
+}
+html.light .cosmic-wrap .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.10);
+  color: #ffffff;
 }
 
 /* Light theme toggle */
