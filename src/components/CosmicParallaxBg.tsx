@@ -13,7 +13,7 @@ function generateStarBoxShadow(count: number): string {
   for (let i = 0; i < count; i++) {
     const x = Math.floor(Math.random() * 2000);
     const y = Math.floor(Math.random() * 2000);
-    shadows.push(`${x}px ${y}px var(--star-color, #FFF)`);
+    shadows.push(`${x}px ${y}px 0 var(--star-spread, 0) var(--star-color, #FFF)`);
   }
   return shadows.join(", ");
 }
@@ -27,9 +27,9 @@ export function CosmicParallaxBg({
 }: CosmicParallaxBgProps) {
   const { small, medium, big } = useMemo(
     () => ({
-      small: generateStarBoxShadow(700),
-      medium: generateStarBoxShadow(200),
-      big: generateStarBoxShadow(100),
+      small: generateStarBoxShadow(900),
+      medium: generateStarBoxShadow(280),
+      big: generateStarBoxShadow(140),
     }),
     [],
   );
