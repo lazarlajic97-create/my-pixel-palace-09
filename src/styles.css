@@ -170,6 +170,31 @@ html.light .theme-toggle:hover {
   background: rgba(15, 34, 80, 0.10);
 }
 
+/* Theme-aware landing helpers */
+@utility stat-value-gradient {
+  background: linear-gradient(90deg, #ffffff 0%, #93c5fd 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+html.light .stat-value-gradient {
+  background: linear-gradient(90deg, #0a1020 0%, #2563eb 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+@utility date-cell {
+  &:hover { background: rgba(255,255,255,0.05); }
+}
+html.light .date-cell:hover { background: rgba(15,34,80,0.06); }
+
+@utility time-slot {
+  background: rgba(255,255,255,0.02);
+}
+html.light .time-slot { background: rgba(15,34,80,0.04); }
+
+@utility industry-card {
+  &:hover { background: rgba(255,255,255,0.04); }
+}
+html.light .industry-card:hover { background: rgba(15,34,80,0.05); }
+
 @utility container-app {
   width: 100%;
   margin-inline: auto;
