@@ -57,13 +57,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "ndawsda" },
-      { name: "description", content: "frewrqdfb" },
-      { property: "og:title", content: "ndawsda" },
-      { property: "og:description", content: "frewrqdfb" },
+      { title: "SoVoice Calendar – KI gesteuerte Terminbuchung" },
+      { name: "description", content: "Die Terminplattform für Unternehmen mit SoVoice. Events definieren, KI bucht automatisch, alles im Überblick." },
+      { property: "og:title", content: "SoVoice Calendar" },
+      { property: "og:description", content: "Events definieren, KI bucht automatisch, alles im Überblick." },
       { property: "og:type", content: "website" },
-      { name: "twitter:title", content: "ndawsda" },
-      { name: "twitter:description", content: "frewrqdfb" },
+      { name: "twitter:title", content: "SoVoice Calendar" },
+      { name: "twitter:description", content: "Events definieren, KI bucht automatisch, alles im Überblick." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/963a600b-d306-4617-99c8-007ed99086de/id-preview-6ff57782--ef2bd4c5-cdfc-45b3-a9db-2ecc2c138c9e.lovable.app-1782178491197.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/963a600b-d306-4617-99c8-007ed99086de/id-preview-6ff57782--ef2bd4c5-cdfc-45b3-a9db-2ecc2c138c9e.lovable.app-1782178491197.png" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -81,11 +81,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+const themeBootstrap = `(function(){try{var t=localStorage.getItem('sovoice-theme');if(!t){t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';}var r=document.documentElement;r.classList.remove('light','dark');r.classList.add(t);}catch(e){document.documentElement.classList.add('dark');}})();`;
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="de" className="dark">
-      <head><HeadContent /></head>
-      <body className="dark antialiased">
+    <html lang="de" suppressHydrationWarning>
+      <head>
+        <HeadContent />
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
+      </head>
+      <body className="antialiased" suppressHydrationWarning>
         {children}
         <Scripts />
       </body>
@@ -98,7 +103,7 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
-      <Toaster theme="dark" position="top-right" richColors closeButton />
+      <Toaster position="top-right" richColors closeButton />
     </QueryClientProvider>
   );
 }

@@ -16,28 +16,29 @@ function Landing() {
       <section className="relative">
         <CosmicParallaxBg
           head="SoVoice Calendar"
-          text="Demo, Beratung, Onboarding, Termine"
+          text="Dein KI Kalender für Demos, Beratung & Onboarding"
           className="min-h-[88vh] flex items-center justify-center pt-12 pb-24"
         >
           <div className="mt-10 flex flex-col items-center gap-4">
             <span className="chip backdrop-blur-md">
               <Sparkles className="h-3 w-3 text-[color:var(--color-accent)]" />
-              KI Telefonagent · Demo in 30 Minuten
+              Powered by SoVoice AI · Vollautomatische Terminvergabe
             </span>
             <p className="max-w-2xl text-base md:text-lg text-[color:var(--color-text-muted)]">
-              Die Terminbuchungsplattform für SoVoice Demo Calls. Professionell,
-              automatisiert und vollständig auf dein Unternehmen zugeschnitten.
+              Die Kalender Plattform für Unternehmen mit SoVoice. Definiere deine Event Typen,
+              Verfügbarkeiten und Regeln – der SoVoice KI Agent telefoniert mit deinen Kunden
+              und trägt jeden Termin mit allen Details automatisch ein.
             </p>
             <div className="mt-2 flex flex-wrap justify-center gap-3">
-              <Link to="/book" className="btn-primary pulse-glow">
-                Jetzt Termin buchen <ArrowRight className="h-4 w-4" />
+              <Link to="/admin" className="btn-primary pulse-glow">
+                Admin Dashboard öffnen <ArrowRight className="h-4 w-4" />
               </Link>
-              <a href="#vorteile" className="btn-secondary">Mehr erfahren</a>
+              <Link to="/book" className="btn-secondary">Buchungsansicht ansehen</Link>
             </div>
             <div className="mt-3 flex flex-wrap justify-center gap-4 text-xs text-[color:var(--color-text-muted)]">
-              <span className="inline-flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-[color:var(--color-success)]" /> Keine Kreditkarte</span>
+              <span className="inline-flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-[color:var(--color-success)]" /> Vollständig konfigurierbar</span>
               <span className="inline-flex items-center gap-1.5"><Shield className="h-3.5 w-3.5 text-[color:var(--color-accent)]" /> DSG & DSGVO bewusst</span>
-              <span className="inline-flex items-center gap-1.5"><Star className="h-3.5 w-3.5 text-[color:var(--color-warning)]" /> Schweizer B2B Qualität</span>
+              <span className="inline-flex items-center gap-1.5"><Star className="h-3.5 w-3.5 text-[color:var(--color-warning)]" /> Für SoVoice Kunden</span>
             </div>
           </div>
         </CosmicParallaxBg>
@@ -137,15 +138,15 @@ function Landing() {
       <section id="vorteile" className="container-app py-24">
         <div className="max-w-2xl">
           <span className="chip mb-4"><Zap className="h-3 w-3 text-[color:var(--color-accent)]" /> Vorteile</span>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight">Mehr Termine.<br/><span className="bg-gradient-to-r from-[#60a5fa] via-[#22d3ee] to-[#a78bfa] bg-clip-text text-transparent">Weniger Telefonstress.</span></h2>
-          <p className="mt-4 text-[color:var(--color-text-muted)] text-lg">Ein professioneller Buchungsprozess gepaart mit einem KI Telefonagenten, der nie ein Gespräch verpasst.</p>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight">Du definierst.<br/><span className="bg-gradient-to-r from-[#60a5fa] via-[#22d3ee] to-[#a78bfa] bg-clip-text text-transparent">SoVoice bucht.</span></h2>
+          <p className="mt-4 text-[color:var(--color-text-muted)] text-lg">Du legst Event Typen, Zeiten und Regeln fest – die KI übernimmt jedes Telefonat und trägt Termine automatisch in deinen Kalender ein.</p>
         </div>
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
-            { icon: Zap, t: "Demo in Sekunden", d: "Interessenten wählen direkt einen passenden Zeitpunkt." },
-            { icon: CalIcon, t: "Automatisiert", d: "Alle Anfragen landen sauber im Kalender." },
-            { icon: PhoneCall, t: "Perfekt für SoVoice", d: "Zeige Kunden direkt, wie KI Telefonie funktioniert." },
-            { icon: Sparkles, t: "Premium Eindruck", d: "Ein hochwertiger Prozess stärkt Vertrauen vor dem Gespräch." },
+            { icon: CalIcon, t: "Eigene Event Typen", d: "Demo, Beratung, Service – definiere alles, was dein Unternehmen anbietet." },
+            { icon: Clock, t: "Verfügbarkeiten steuern", d: "Arbeitszeiten, Pausen, Puffer und Mindestvorlauf – alles in deiner Hand." },
+            { icon: PhoneCall, t: "KI bucht automatisch", d: "Der SoVoice Agent telefoniert und trägt Termine vollautomatisch ein." },
+            { icon: Sparkles, t: "Volle Übersicht", d: "Jeder Lead, jeder Termin, jede Statistik – live im Dashboard." },
           ].map(({icon:Icon,t,d}) => (
             <div key={t} className="glass p-6 group hover:border-[rgba(59,130,246,0.4)] transition-all hover:-translate-y-1 hover:shadow-[0_20px_60px_-20px_rgba(59,130,246,0.4)]">
               <div className="h-11 w-11 rounded-xl bg-gradient-to-br from-[rgba(37,99,235,0.3)] to-[rgba(34,211,238,0.2)] border border-[rgba(59,130,246,0.3)] grid place-items-center mb-4 group-hover:scale-110 transition">
@@ -162,15 +163,15 @@ function Landing() {
       <section className="container-app py-24">
         <div className="max-w-2xl">
           <span className="chip mb-4"><CalIcon className="h-3 w-3 text-[color:var(--color-accent)]" /> Ablauf</span>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight">So funktioniert die Buchung</h2>
-          <p className="mt-4 text-[color:var(--color-text-muted)] text-lg">In vier klaren Schritten zu deinem SoVoice Termin.</p>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight">So funktioniert SoVoice Calendar</h2>
+          <p className="mt-4 text-[color:var(--color-text-muted)] text-lg">Vier Schritte vom Setup bis zum vollautomatisierten Kalender.</p>
         </div>
         <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {[
-            {t:"Terminart wählen", d:"Wähle zwischen Demo, Beratung oder Onboarding."},
-            {t:"Zeitpunkt auswählen", d:"Sieh sofort, welche Slots verfügbar sind."},
-            {t:"Daten eintragen", d:"Wenige Felder – DSG konform abgesichert."},
-            {t:"Bestätigung erhalten", d:"Mit Kalender Einladung und Erinnerung."},
+            {t:"Event Typen anlegen", d:"Erstelle deine Termin Arten – Dauer, Ort, Puffer, Beschreibung."},
+            {t:"Verfügbarkeiten setzen", d:"Definiere Arbeitszeiten, Pausen und Buchungsregeln pro Event."},
+            {t:"SoVoice KI verbinden", d:"Der KI Agent übernimmt Anrufe und qualifiziert deine Leads."},
+            {t:"Termine im Überblick", d:"Alle Buchungen erscheinen live im Kalender – inklusive Details."},
           ].map((s,i) => (
             <div key={s.t} className="glass p-6 relative overflow-hidden hover:border-[rgba(59,130,246,0.4)] transition">
               <div className="text-6xl font-bold bg-gradient-to-br from-[#3b82f6] to-[#8b5cf6] bg-clip-text text-transparent opacity-70 leading-none">0{i+1}</div>
@@ -231,10 +232,10 @@ function Landing() {
           <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-64 w-[600px] rounded-full bg-[rgba(59,130,246,0.25)] blur-3xl" />
           <div className="relative grid md:grid-cols-[1fr_auto] gap-6 items-center">
             <div>
-              <h2 className="text-2xl md:text-4xl font-bold tracking-tight">Bereit für deinen Demo Call?</h2>
-              <p className="mt-3 text-[color:var(--color-text-muted)] text-lg">30 Minuten – unverbindlich. Wir analysieren gemeinsam, wo Automatisierung Sinn macht.</p>
+              <h2 className="text-2xl md:text-4xl font-bold tracking-tight">Bereit, deinen Kalender zu automatisieren?</h2>
+              <p className="mt-3 text-[color:var(--color-text-muted)] text-lg">Richte deine Event Typen ein und lass SoVoice ab sofort jeden Termin für dich buchen.</p>
             </div>
-            <Link to="/book" className="btn-primary pulse-glow whitespace-nowrap">Jetzt Termin buchen <ArrowRight className="h-4 w-4" /></Link>
+            <Link to="/admin" className="btn-primary pulse-glow whitespace-nowrap">Zum Admin Dashboard <ArrowRight className="h-4 w-4" /></Link>
           </div>
         </div>
       </section>
