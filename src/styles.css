@@ -140,19 +140,19 @@ html.light .text-gradient {
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
-/* Light cosmic hero – dark navy top → blue middle → white bottom */
+/* Light cosmic hero – stays dark like dark mode, only soft fade to white at the very bottom */
 html.light .cosmic-wrap {
-  --cosmic-bg-mid: #bfdbfe;
-  --cosmic-bg-outer: #e0f2fe;
-  --star-color: #93c5fd;
-  --star-spread: 1px;
+  --cosmic-bg-mid: #0b1a3a;
+  --cosmic-bg-outer: #05070d;
+  --star-color: #ffffff;
+  --star-spread: 0;
   background: linear-gradient(
     180deg,
-    #0a1020 0%,
-    #0f1d40 18%,
-    #1e3a8a 38%,
-    #3b82f6 58%,
-    #93c5fd 78%,
+    #03060f 0%,
+    #05091a 28%,
+    #07112a 55%,
+    #0b1a3a 80%,
+    #1e3a8a 93%,
     #ffffff 100%
   ) !important;
 }
@@ -161,8 +161,8 @@ html.light .cosmic-stars::after {
   border-radius: 50%;
 }
 html.light .cosmic-stars {
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 90%);
-          mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 90%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 82%, transparent 98%);
+          mask-image: linear-gradient(180deg, #000 0%, #000 82%, transparent 98%);
 }
 html.light .cosmic-horizon {
   --cosmic-horizon-inner: rgba(255, 255, 255, 0.55);
