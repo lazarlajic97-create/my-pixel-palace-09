@@ -49,13 +49,13 @@ export function BookingCalendar({
       <div className="flex items-center justify-between mb-4">
         <div>
           <div className="text-base font-semibold tracking-tight">
-            <span className="bg-gradient-to-r from-white to-[#93c5fd] bg-clip-text text-transparent">{MONTHS[month]}</span> {year}
+            <span className="month-gradient">{MONTHS[month]}</span> {year}
           </div>
           <div className="text-[11px] text-[color:var(--color-text-dim)] mt-0.5">Zeitzone: {availability.timezone}</div>
         </div>
         <div className="flex items-center gap-1">
-          <button onClick={() => setView(new Date(year, month - 1, 1))} aria-label="Vorheriger Monat" className="h-9 w-9 grid place-items-center rounded-lg border border-[color:var(--color-border-strong)] hover:bg-white/5 hover:border-[rgba(59,130,246,0.4)] transition"><ChevronLeft className="h-4 w-4" /></button>
-          <button onClick={() => setView(new Date(year, month + 1, 1))} aria-label="Nächster Monat" className="h-9 w-9 grid place-items-center rounded-lg border border-[color:var(--color-border-strong)] hover:bg-white/5 hover:border-[rgba(59,130,246,0.4)] transition"><ChevronRight className="h-4 w-4" /></button>
+          <button onClick={() => setView(new Date(year, month - 1, 1))} aria-label="Vorheriger Monat" className="cal-nav-hover h-9 w-9 grid place-items-center rounded-lg border border-[color:var(--color-border-strong)] hover:border-[rgba(59,130,246,0.4)] transition"><ChevronLeft className="h-4 w-4" /></button>
+          <button onClick={() => setView(new Date(year, month + 1, 1))} aria-label="Nächster Monat" className="cal-nav-hover h-9 w-9 grid place-items-center rounded-lg border border-[color:var(--color-border-strong)] hover:border-[rgba(59,130,246,0.4)] transition"><ChevronRight className="h-4 w-4" /></button>
         </div>
       </div>
 
