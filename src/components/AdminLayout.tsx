@@ -37,8 +37,8 @@ export function AdminLayout({ children, title, subtitle, actions }: { children: 
               onClick={() => setOpen(false)}
               className={`relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition group ${
                 active
-                  ? "text-white"
-                  : "text-[color:var(--color-text-muted)] hover:bg-white/5 hover:text-white"
+                  ? "text-[color:var(--color-text)]"
+                  : "text-[color:var(--color-text-muted)] hover:bg-[rgba(15,34,80,0.05)] hover:text-[color:var(--color-text)]"
               }`}
             >
               {active && (
@@ -47,7 +47,7 @@ export function AdminLayout({ children, title, subtitle, actions }: { children: 
                   <span className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-0.5 rounded-r bg-gradient-to-b from-[#60a5fa] to-[#22d3ee]" />
                 </>
               )}
-              <Icon className={`relative h-4 w-4 shrink-0 ${active ? "text-[#60a5fa]" : ""}`} />
+              <Icon className={`relative h-4 w-4 shrink-0 ${active ? "text-[#2563eb]" : ""}`} />
               <span className="relative">{n.label}</span>
             </Link>
           );
