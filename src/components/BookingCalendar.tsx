@@ -113,7 +113,7 @@ export function TimeSlots({ value, onChange, slots }: { value: string | null; on
             className={`px-3 py-2.5 rounded-lg text-sm font-medium transition border ${
               selected
                 ? "bg-gradient-to-br from-[#3b82f6] to-[#1e40af] text-white border-[#60a5fa] shadow-[0_0_20px_-4px_rgba(59,130,246,0.7)]"
-                : "bg-white/[0.02] border-[color:var(--color-border-strong)] text-[color:var(--color-text)] hover:border-[rgba(59,130,246,0.5)] hover:bg-[rgba(59,130,246,0.06)]"
+                : "slot-inactive border-[color:var(--color-border-strong)] text-[color:var(--color-text)] hover:border-[rgba(59,130,246,0.5)]"
             }`}
           >
             {t}
