@@ -1,7 +1,8 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import { Logo } from "./Logo";
-import { LayoutDashboard, Calendar, Layers, Clock, Plug, Settings, Menu, X, Bell, Search, BarChart3 } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
+import { LayoutDashboard, Calendar, Layers, Clock, Plug, Settings, Menu, Bell, Search, BarChart3 } from "lucide-react";
 
 const nav = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
@@ -104,6 +105,7 @@ export function AdminLayout({ children, title, subtitle, actions }: { children: 
                 <input placeholder="Suchen ..." className="bg-transparent outline-none w-full placeholder:text-[color:var(--color-text-dim)] text-[color:var(--color-text)]" />
                 <kbd className="hidden lg:inline-flex text-[10px] px-1.5 py-0.5 rounded bg-white/5 border border-[color:var(--color-border-strong)]">⌘K</kbd>
               </div>
+              <ThemeToggle />
               <button className="btn-ghost relative" aria-label="Benachrichtigungen">
                 <Bell className="h-4 w-4" />
                 <span className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-[color:var(--color-accent)] animate-pulse" />

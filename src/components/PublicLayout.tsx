@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import { Logo } from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
 import { Menu, X } from "lucide-react";
 
 const nav = [
@@ -24,10 +25,17 @@ export function PublicLayout({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <div className="hidden md:flex items-center gap-2">
+            <ThemeToggle />
             <Link to="/admin" className="btn-ghost">Admin</Link>
             <Link to="/book" className="btn-primary">Termin buchen</Link>
           </div>
-          <button onClick={() => setOpen(!open)} className="md:hidden btn-ghost" aria-label="Menü">
+          <div className="md:hidden flex items-center gap-2">
+            <ThemeToggle />
+            <button onClick={() => setOpen(!open)} className="btn-ghost" aria-label="Menü">
+              {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
+          </div>
+          <button onClick={() => setOpen(!open)} className="md:hidden btn-ghost hidden" aria-label="Menü">
             {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
