@@ -144,8 +144,8 @@ html.light .text-gradient {
 html.light .cosmic-wrap {
   --cosmic-bg-mid: #0b1a3a;
   --cosmic-bg-outer: #05070d;
-  --star-color: #ffffff;
-  --star-spread: 0;
+  --star-color: #e0f2fe;
+  --star-spread: 0.5px;
   background: linear-gradient(
     180deg,
     #03060f 0%,
