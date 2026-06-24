@@ -149,10 +149,10 @@ html.light .cosmic-wrap {
   background: linear-gradient(
     180deg,
     #03060f 0%,
-    #05091a 28%,
-    #07112a 55%,
-    #0b1a3a 80%,
-    #1e3a8a 93%,
+    #05091a 40%,
+    #07112a 70%,
+    #0b1a3a 90%,
+    #1e3a8a 97%,
     #ffffff 100%
   ) !important;
 }
