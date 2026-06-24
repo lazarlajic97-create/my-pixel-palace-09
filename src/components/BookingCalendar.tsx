@@ -80,8 +80,8 @@ export function BookingCalendar({
                   : disabled
                   ? "text-[color:var(--color-text-dim)] opacity-30 cursor-not-allowed"
                   : isToday
-                  ? "text-white border border-[rgba(34,211,238,0.5)] bg-[rgba(34,211,238,0.06)] hover:bg-[rgba(34,211,238,0.12)]"
-                  : "text-[color:var(--color-text)] hover:bg-white/5 border border-transparent hover:border-[color:var(--color-border-strong)]"
+                  ? "today-cell"
+                  : "text-[color:var(--color-text)] cal-nav-hover border border-transparent hover:border-[color:var(--color-border-strong)]"
               }`}
             >
               {d.getDate()}
