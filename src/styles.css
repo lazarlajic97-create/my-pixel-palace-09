@@ -143,10 +143,15 @@ html.light .text-gradient {
 html.light .cosmic-wrap {
   --cosmic-bg-mid: #bfdbfe;
   --cosmic-bg-outer: #e0f2fe;
-  --star-color: #172554;
+  --star-color: #1e3a8a;
+  --star-spread: 1px;
 }
 /* Note: no `filter: drop-shadow` on .cosmic-stars — it forces per-frame
    rasterization of the huge box-shadow star field and tanks performance. */
+html.light .cosmic-stars,
+html.light .cosmic-stars::after {
+  border-radius: 50%;
+}
 html.light .cosmic-horizon {
   --cosmic-horizon-inner: rgba(37, 99, 235, 0.32);
   --cosmic-horizon-mid: rgba(14, 165, 233, 0.14);
@@ -363,7 +368,10 @@ html.light .slot-inactive {
 /* Cosmic parallax */
 :root { --animation-iteration: infinite; }
 
-.cosmic-wrap { min-height: 100vh; }
+.cosmic-wrap {
+  min-height: 100vh;
+  --star-spread: 0;
+}
 .cosmic-stars {
   position: absolute;
   top: 0; left: 0;
