@@ -18,7 +18,7 @@ function RegisterPage() {
     setLoading(true);
     setTimeout(() => {
       try { localStorage.setItem("sovoice_user", JSON.stringify({ email, company })); } catch {}
-      navigate({ to: "/admin" });
+      navigate({ to: "/" });
     }, 600);
   };
 
