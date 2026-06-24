@@ -139,6 +139,37 @@ html.light .text-gradient {
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
+/* Light cosmic hero */
+html.light .cosmic-wrap {
+  --cosmic-bg-mid: #dbeafe;
+  --cosmic-bg-outer: #f1f6ff;
+  --star-color: #60a5fa;
+}
+html.light .cosmic-horizon {
+  --cosmic-horizon-inner: rgba(59, 130, 246, 0.28);
+  --cosmic-horizon-mid: rgba(14, 165, 233, 0.12);
+}
+html.light .cosmic-earth {
+  --cosmic-earth-inner: #bfdbfe;
+  --cosmic-earth-outer: #dbeafe;
+  --cosmic-glow: rgba(59, 130, 246, 0.18);
+}
+html.light .cosmic-head {
+  --cosmic-head-from: #0a1020;
+  --cosmic-head-mid: #1d4ed8;
+  --cosmic-head-to: #0ea5e9;
+  --cosmic-head-glow: rgba(37, 99, 235, 0.18);
+}
+
+/* Light theme toggle */
+html.light .theme-toggle {
+  background: rgba(15, 34, 80, 0.06);
+  border-color: rgba(15, 34, 80, 0.12);
+}
+html.light .theme-toggle:hover {
+  background: rgba(15, 34, 80, 0.10);
+}
+
 @utility container-app {
   width: 100%;
   margin-inline: auto;
